@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+
+.griddle-table {
+  @apply text-left;
+  @apply w-auto;
+}
+
+.griddle-table-heading {
+  @apply font-semibold;
+}
+
+.griddle-table-heading-cell {
+  @apply px-1;
+  @apply py-1;
+  /* @apply w-2; */
+}
+
+.griddle-table-body {
+  @apply text-sm;
+}
+
+.griddle-cell {
+  @apply px-1;
+  @apply py-1;
+  /* @apply w-2; */
+}
+
+.spinner {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.spinner::after {
+  content: "";
+  position: absolute !important;
+  top: calc(50% - (1em / 2));
+  left: calc(50% - (1em / 2));
+  display: block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-radius: 9999px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  animation: spinAround 500ms infinite linear;
+}
+
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@tailwind utilities;
