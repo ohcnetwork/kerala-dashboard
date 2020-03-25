@@ -54,6 +54,10 @@ function Table(props) {
         }}
         plugins={[plugins.LocalPlugin]}
         sortProperties={sortProperties}
+        pageProperties={{
+          currentPage: 1,
+          pageSize: 14
+        }}
       >
         <RowDefinition>
           <ColumnDefinition
