@@ -606,35 +606,6 @@ video {
   }
 }
 
-.griddle-table {
-  text-align: left;
-  width: auto;
-}
-
-.griddle-table-heading {
-  font-weight: 600;
-}
-
-.griddle-table-heading-cell {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  /* @apply w-2; */
-}
-
-.griddle-table-body {
-  font-size: 0.875rem;
-}
-
-.griddle-cell {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  /* @apply w-2; */
-}
-
 .spinner {
   position: relative;
   color: transparent !important;

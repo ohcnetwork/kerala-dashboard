@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import { legendColor } from "d3-svg-legend";
 import * as topojson from "topojson";
 import useWindowWidth from "hook-usewindowwidth";
+import lang from "./lang";
 
 function Map(props) {
   const districts = props.districts;
@@ -177,35 +178,23 @@ function Map(props) {
           </div>
           {windowWidth < 650 && <div className="w-screen"></div>}
           <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-red-500">
-            <p className="font-sans text-base">Confirmed</p>
+            <p className="font-sans text-base">{lang.corona_positive}</p>
             <p className="font-sans text-lg">{district.corona_positive}</p>
           </div>
-          <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-yellow-500">
-            <p className="font-sans text-base">Active</p>
-            <p className="font-sans text-lg">{district.total_hospitalised}</p>
-          </div>
           <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-green-500">
-            <p className="font-sans text-base">Recovered</p>
+            <p className="font-sans text-base">{lang.cured_discharged}</p>
             <p className="font-sans text-lg">{district.cured_discharged}</p>
           </div>
-
-          <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-gray-800">
-            <p className="font-sans text-base">Deaths</p>
-            <p className="font-sans text-lg">{district.deaths}</p>
-          </div>
-          <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-gray-800">
-            <p className="font-sans text-base">Today</p>
-            <p className="font-sans text-lg">{district.hospitalised_today}</p>
-          </div>
-          <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-gray-800">
-            <p className="font-sans text-base">Under Observation</p>
-            <p className="font-sans text-lg">{district.under_observation}</p>
-          </div>
-
-          <div className="flex flex-col pb-0 sm:py-2 px-2 my-0 sm:my-1 text-gray-800">
-            <p className="font-sans text-base">Home Isolation</p>
-            <p className="font-sans text-lg">{district.under_home_isolation}</p>
-          </div>
+          {Object.keys(lang)
+            .slice(3)
+            .map((k, i) => {
+              return (
+                <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-gray-800">
+                  <p className="font-sans text-base">{lang[k]}</p>
+                  <p className="font-sans text-lg">{district[k]}</p>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

@@ -36,7 +36,7 @@ function App() {
               <div className="flex w-auto sm:w-1/2 flex-col items-center">
                 <Map districts={districts} />
               </div>
-              <div className="flex w-auto sm:w-1/2 flex-col items-center self-center order-last sm:order-first">
+              <div className="flex w-auto sm:w-1/2 flex-col xl:items-center xl:self-center order-last sm:order-last md:order-last lg:order-first xl:order-first overflow-auto sm:overflow-x-scroll md:overflow-hidden lg:overflow-hidden xl:overflow-hidden ">
                 <Table districts={districts} />
               </div>
             </div>
