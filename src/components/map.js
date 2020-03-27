@@ -165,7 +165,7 @@ function Map(props) {
     <div className="flex flex-nowrap sm:flex-wrap">
       <div className="flex flex-col sm:flex-row text-gray-800 text-left">
         <svg
-          className="font-sans text-base self-center sm:self-start"
+          className="text-base self-center sm:self-start"
           id="chart"
           height="575"
           width="300"
@@ -174,24 +174,24 @@ function Map(props) {
         <div className="w-48 min-w-0 sm:min-w-full md:min-w-0 lg:min-w-0 xl:min-w-0 flex-grow sm:flex-grow-"></div>
         <div className="flex flex-row sm:flex-col flex-wrap sm:flex-nowrap text-gray-800 w-auto sm:w-56 min-w-0 sm:min-w-full md:min-w-0 lg:min-w-0 xl:min-w-0 text-left sm:text-left md:text-right lg:text-right xl:text-right self-center">
           <div className="flex flex-col p-2 mb-1 font-semibold">
-            <p className="font-sans text-lg">{district.name}</p>
+            <p className="text-lg">{district.name}</p>
           </div>
           {windowWidth < 650 && <div className="w-screen"></div>}
           <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-red-500">
-            <p className="font-sans text-base">{lang.corona_positive}</p>
-            <p className="font-sans text-lg">{district.corona_positive}</p>
+            <p className="text-base">{lang.corona_positive}</p>
+            <p className="text-lg">{district.corona_positive}</p>
           </div>
           <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-green-500">
-            <p className="font-sans text-base">{lang.cured_discharged}</p>
-            <p className="font-sans text-lg">{district.cured_discharged}</p>
+            <p className="text-base">{lang.cured_discharged}</p>
+            <p className="text-lg">{district.cured_discharged}</p>
           </div>
           {Object.keys(lang)
             .slice(3)
             .map((k, i) => {
               return (
                 <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-gray-800">
-                  <p className="font-sans text-base">{lang[k]}</p>
-                  <p className="font-sans text-lg">{district[k]}</p>
+                  <p className="text-base">{lang[k]}</p>
+                  <p className="text-lg">{district[k]}</p>
                 </div>
               );
             })}

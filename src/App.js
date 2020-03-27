@@ -28,8 +28,8 @@ function App() {
       )}
       {fetched && (
         <div>
-          <div className="flex flex-col items-center m-5">
-            <p className="items-center font-sans text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl">
+          <div className="flex flex-col items-center m-5 font-sans">
+            <p className="items-center text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl">
               Kerala COVID-19 Tracker
             </p>
             <div className="flex flex-wrap w-screen">
