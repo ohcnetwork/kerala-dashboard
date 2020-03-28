@@ -70,60 +70,56 @@ function Table(props) {
 
   doSort();
 
-  const getHeading = () => {
-    return lang;
-  };
-
   return (
-    <div className="flex-none flex-col text-base text-gray-800 px-1 mt-4 sm:mt-0">
-      <table className="table-auto min-w-full">
-        <thead>
-          <tr>
-            {Object.keys(getHeading()).map((header, index) => {
+    <div className="flex flex-col text-base">
+      <div className="rounded-lg bg-fiord-800 p-4 overflow-x-scroll sm:overflow-x-scroll md:overflow-hidden lg:overflow-hidden xl:overflow-hidden">
+        <table className="table-auto">
+          <thead>
+            <tr>
+              {Object.keys(lang).map((header, index) => {
+                return (
+                  <th
+                    className="text-left pr-4"
+                    key={index}
+                    onClick={e => handleSort(e, props)}
+                  >
+                    <abbr className="text-red-500" title={header}>
+                      {lang[header]}
+                    </abbr>
+                    {sortData.sortColumn === header && <span>*</span>}
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((district, index) => {
               return (
-                <th
-                  className="text-left pr-4"
-                  key={index}
-                  onClick={e => handleSort(e, props)}
-                >
-                  <abbr className="text-red-500" title={header}>
-                    {getHeading()[header]}
-                  </abbr>
-                  {sortData.sortColumn === header && (
-                    <span className="text-gray-500">*</span>
-                  )}
-                </th>
+                <tr key={index}>
+                  {Object.keys(lang).map((header, index) => {
+                    return (
+                      <td
+                        className={header !== "district" ? "" : "text-blue-500"}
+                        key={index}
+                      >
+                        {district[header]}
+                      </td>
+                    );
+                  })}
+                </tr>
               );
             })}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((district, index) => {
-            return (
-              <tr key={index}>
-                {Object.keys(getHeading()).map((header, index) => {
-                  return (
-                    <td
-                      className={header !== "district" ? "" : "text-blue-500"}
-                      key={index}
-                    >
-                      {district[header]}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-          <tr className="font-semibold py-64">
-            <td>Total</td>
-            {Object.keys(getHeading()).map((header, index) => {
-              if (index !== 0) {
-                return <td key={index}>{total[header]}</td>;
-              }
-            })}
-          </tr>
-        </tbody>
-      </table>
+            <tr className="font-semibold py-64">
+              <td>Total</td>
+              {Object.keys(lang).map((header, index) => {
+                if (index !== 0) {
+                  return <td key={index}>{total[header]}</td>;
+                }
+              })}
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

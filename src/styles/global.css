@@ -30,5 +30,13 @@
     transform: rotate(360deg);
   }
 }
+/* .legendTitle {
+  fill: #edf2f7
+} */
+.legend text {
+  fill: #edf2f7
+}
+
+@import url('https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap');
 
 @tailwind utilities;

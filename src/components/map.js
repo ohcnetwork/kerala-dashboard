@@ -26,7 +26,7 @@ function Map(props) {
         deaths: districts[first].deaths
       });
       let total = 0;
-      let minConfirmed = 100000;
+      let minConfirmed = 800000;
       let maxConfirmed = 0;
       for (const d in districts) {
         total += districts[d].corona_positive;
@@ -48,7 +48,7 @@ function Map(props) {
 
       const projection = d3
         .geoMercator()
-        .center([76.8, 9.7])
+        .center([76.85, 9.3])
         .scale(height * 8)
         .translate([width / 2, height / 2]);
 
@@ -75,13 +75,13 @@ function Map(props) {
       svg
         .append("g")
         .attr("class", "legend")
-        .attr("transform", "translate(10, 375)");
+        .attr("transform", "translate(5, 350)");
 
       const numCells = 6;
       const delta = Math.floor(statistic.maxConfirmed / (numCells - 1));
       const cells = Array.from(Array(numCells).keys()).map(i => i * delta);
 
-      const legendLinear = legendColor()
+      const legend = legendColor()
         .shapeWidth(30)
         .cells(cells)
         .titleWidth(3)
@@ -90,7 +90,7 @@ function Map(props) {
         .orient("vertical")
         .scale(color);
 
-      svg.select(".legend").call(legendLinear);
+      svg.select(".legend").call(legend);
 
       const promises = [d3.json("/kerala.json")];
 
@@ -142,7 +142,7 @@ function Map(props) {
           .text(function(d) {
             return (
               parseFloat(
-                100 *
+                800 *
                   (parseInt(districts[d.properties.DISTRICT].corona_positive) /
                     statistic.total)
               ).toFixed(2) +
@@ -162,40 +162,30 @@ function Map(props) {
   }, [districts, statistic.maxConfirmed, statistic.total]);
 
   return (
-    <div className="flex flex-nowrap sm:flex-wrap">
-      <div className="flex flex-col sm:flex-row text-gray-800 text-left">
-        <svg
-          className="text-base self-center sm:self-start"
-          id="chart"
-          height="575"
-          width="300"
-          ref={map}
-        ></svg>
-        <div className="w-48 min-w-0 sm:min-w-full md:min-w-0 lg:min-w-0 xl:min-w-0 flex-grow sm:flex-grow-"></div>
-        <div className="flex flex-row sm:flex-col flex-wrap sm:flex-nowrap text-gray-800 w-auto sm:w-56 min-w-0 sm:min-w-full md:min-w-0 lg:min-w-0 xl:min-w-0 text-left sm:text-left md:text-right lg:text-right xl:text-right self-center">
-          <div className="flex flex-col p-2 mb-1 font-semibold">
-            <p className="text-lg">{district.name}</p>
-          </div>
-          {windowWidth < 650 && <div className="w-screen"></div>}
-          <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-red-500">
-            <p className="text-base">{lang.corona_positive}</p>
-            <p className="text-lg">{district.corona_positive}</p>
-          </div>
-          <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-green-500">
-            <p className="text-base">{lang.cured_discharged}</p>
-            <p className="text-lg">{district.cured_discharged}</p>
-          </div>
-          {Object.keys(lang)
-            .slice(3)
-            .map((k, i) => {
-              return (
-                <div className="flex flex-col py-0 sm:py-2 px-2 my-0 sm:my-1 text-gray-800">
-                  <p className="text-base">{lang[k]}</p>
-                  <p className="text-lg">{district[k]}</p>
-                </div>
-              );
-            })}
+    <div className="flex relative rounded-lg p-4 bg-fiord-800 mb-4 xl:mb-0">
+      <svg
+        className="z-0"
+        id="chart"
+        height="517"
+        // width={windowWidth < 650 ? 375 : windowWidth * 0.28}
+        ref={map}
+      ></svg>
+      <div className="z-40 flex-col absolute top-0 right-0 text-right sm:text-right md:text-right lg:text-right xl:text-right text-xs sm:text-xs md:text-sm lg:text-base xl:text-base">
+        <div className="flex-col mb-1 font-semibold m-2 px-2 py-1 rounded-md bg-gradient-r-fiord-700">
+          <p className="text-base sm:text-base md:text-base lg:text-xl xl:text-xl">
+            {district.name}
+          </p>
         </div>
+        {Object.keys(lang)
+          .slice(1)
+          .map((k, i) => {
+            return (
+              <div className="flex-col m-2 px-2 py-1 rounded-md bg-gradient-r-fiord-700">
+                <p>{lang[k]}</p>
+                <p>{district[k]}</p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
