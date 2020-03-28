@@ -2,14 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { legendColor } from "d3-svg-legend";
 import * as topojson from "topojson";
-import useWindowWidth from "hook-usewindowwidth";
 import lang from "./lang";
 
 function Map(props) {
   const districts = props.districts;
   const [district, setDistrict] = useState({});
   const [statistic, setStatistic] = useState({});
-  const windowWidth = useWindowWidth();
   const map = useRef(null);
 
   useEffect(() => {
@@ -167,7 +165,6 @@ function Map(props) {
         className="z-0"
         id="chart"
         height="517"
-        // width={windowWidth < 650 ? 375 : windowWidth * 0.28}
         ref={map}
       ></svg>
       <div className="z-40 flex-col absolute top-0 right-0 text-right sm:text-right md:text-right lg:text-right xl:text-right text-xs sm:text-xs md:text-sm lg:text-base xl:text-base">
