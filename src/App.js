@@ -29,7 +29,7 @@ function App() {
         <div className="flex flex-col p-5 font-inter text-primary overflow-hidden antialiased">
           <div className="flex flex-col xl:flex-row">
             <div className="flex flex-col xl:pr-2 xl:mr-auto mb-2 xl:mb-0">
-              <p className="font-extrabold tracking-wider text-2xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-5xl text-center xl:text-left">
+              <p className="font-extrabold tracking-wider text-2xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-5xl text-center xl:text-left">
                 KERALA COVID-19 TRACKER
               </p>
             </div>
