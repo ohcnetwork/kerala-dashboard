@@ -41,7 +41,7 @@ function App() {
             <div className="flex flex-col pl-0 xl:pl-2">
               <Map districts={districts} />
             </div>
-            <div className="flex flex-col order-last sm:order-last md:order-last lg:order-first xl:order-first pr-0 xl:pr-2">
+            <div className="flex flex-col order-last xl:order-first pr-0 xl:pr-2">
               <Table districts={districts} />
             </div>
           </div>
