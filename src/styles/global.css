@@ -30,9 +30,6 @@
     transform: rotate(360deg);
   }
 }
-/* .legendTitle {
-  fill: #edf2f7
-} */
 .legend text {
   fill: #edf2f7
 }

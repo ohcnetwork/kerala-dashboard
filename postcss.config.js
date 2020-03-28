@@ -1,6 +1,6 @@
 const tailwindcss = require("tailwindcss");
 const purgecss = require("@fullhuman/postcss-purgecss")({
-  content: ["./src/**/*.html", "./src/**/*.js"],
+  content: ["./public/**/*.html", "./src/**/*.js"],
   defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
 });
 module.exports = {
