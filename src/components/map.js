@@ -160,18 +160,11 @@ function Map(props) {
   }, [districts, statistic.maxConfirmed, statistic.total]);
 
   return (
-    <div className="flex relative rounded-lg p-4 bg-fiord-800 mb-4 xl:mb-0">
-      <svg
-        className="z-0"
-        id="chart"
-        height="517"
-        ref={map}
-      ></svg>
-      <div className="z-40 flex-col absolute top-0 right-0 text-right sm:text-right md:text-right lg:text-right xl:text-right text-xs sm:text-xs md:text-sm lg:text-base xl:text-base">
-        <div className="flex-col mb-1 font-semibold m-2 px-2 py-1 rounded-md bg-gradient-r-fiord-700">
-          <p className="text-base sm:text-base md:text-base lg:text-xl xl:text-xl">
-            {district.name}
-          </p>
+    <div className="flex relative rounded-lg p-4 bg-fiord-800 mb-4 avg:mb-0">
+      <svg className="z-0" id="chart" height="517" ref={map}></svg>
+      <div className="z-40 flex-col absolute top-0 right-0 text-right text-xs md:text-base">
+        <div className="flex-col m-2 px-2 py-1 rounded-md bg-gradient-r-fiord-700 font-semibold">
+          <p className="text-base lg:text-xl">{district.name}</p>
         </div>
         {Object.keys(lang)
           .slice(1)
@@ -179,7 +172,7 @@ function Map(props) {
             return (
               <div className="flex-col m-2 px-2 py-1 rounded-md bg-gradient-r-fiord-700">
                 <p>{lang[k]}</p>
-                <p>{district[k]}</p>
+                <p className="font-medium">{district[k]}</p>
               </div>
             );
           })}

@@ -30,6 +30,9 @@ module.exports = {
           800: "#222730",
           900: "#171A20"
         }
+      },
+      screens: {
+        avg: "1432px"
       }
     },
     linearBorderGradients: theme => ({ colors: theme("colors") }),

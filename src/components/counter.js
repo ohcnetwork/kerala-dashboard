@@ -24,19 +24,21 @@ function Counter(props) {
   };
 
   return (
-    <div className="flex flex-row justify-start p-2 rounded-lg bg-fiord-800 mb-4 max-w-none ">
+    <div className="flex flex-row justify-start p-2 rounded-lg bg-fiord-800 max-w-none overflow-hidden">
       {Object.keys(topBox).map(header => {
         return (
           <div
             key={header}
             className={
               topBox[header] +
-              " flex-auto max-w-none mx-1 p-1 xl:px-2 rounded-lg text-gray-900 "
+              " flex-auto avg:flex-shrink-0 max-w-none mx-1 p-1 avg:px-2 rounded-lg text-gray-900 "
             }
           >
             <div>
-              <p className="font-medium uppercase text-xs md:text-base xl:text-base">{lang[header]}</p>
-              <p className="font-bold text-base md:text-lg xl:text-lg">{total[header]}</p>
+              <p className="font-medium uppercase text-xs avg:text-base">
+                {lang[header]}
+              </p>
+              <p className="font-bold text-base avg:text-lg">{total[header]}</p>
             </div>
           </div>
         );

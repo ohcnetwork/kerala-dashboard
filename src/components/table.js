@@ -72,7 +72,7 @@ function Table(props) {
 
   return (
     <div className="flex flex-col text-base">
-      <div className="rounded-lg bg-fiord-800 p-4 overflow-x-scroll sm:overflow-x-scroll md:overflow-hidden lg:overflow-hidden xl:overflow-hidden">
+      <div className="rounded-lg bg-fiord-800 p-4 overflow-x-scroll md:overflow-hidden">
         <table className="table-auto">
           <thead>
             <tr>

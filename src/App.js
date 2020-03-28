@@ -23,25 +23,29 @@ function App() {
   }, [fetched]);
 
   return (
-    <div className="flex bg-fiord-900 min-h-screen min-w-full">
+    <div className="flex bg-fiord-900 min-h-screen min-w-full justify-center">
       {!fetched && <div className="spinner min-h-screen min-w-full"></div>}
       {fetched && (
         <div className="flex flex-col p-5 font-inter text-primary overflow-hidden antialiased">
-          <div className="flex flex-col xl:flex-row">
-            <div className="flex flex-col xl:pr-2 xl:mr-auto mb-2 xl:mb-0">
-              <p className="font-extrabold tracking-wider text-2xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-5xl text-center xl:text-left">
+          <div className="flex flex-col avg:flex-row">
+            <div className="flex-none avg:pr-2 avg:mr-auto mb-2 avg:mb-0">
+              <p className="font-extrabold tracking-wider text-2xl sm:text-2xl md:text-3xl lg:text-4xl avg:text-5xl text-center avg:text-left">
                 KERALA COVID-19 TRACKER
               </p>
+              <p className="text-sm text-center avg:text-left">
+                Updated daily with data from Directorate of Health Services,
+                Kerala
+              </p>
             </div>
-            <div className="flex flex-col pl-0 xl:pl-2">
+            <div className="flex flex-col pl-0 avg:pl-2">
               <Counter districts={districts} />
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row">
-            <div className="flex flex-col pl-0 xl:pl-2">
+          <div className="flex flex-col avg:flex-row mt-4">
+            <div className="flex flex-col pl-0 avg:pl-2">
               <Map districts={districts} />
             </div>
-            <div className="flex flex-col order-last xl:order-first pr-0 xl:pr-2">
+            <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2">
               <Table districts={districts} />
             </div>
           </div>
