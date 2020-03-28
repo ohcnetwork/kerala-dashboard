@@ -23,7 +23,7 @@ function App() {
   }, [fetched]);
 
   return (
-    <div className="flex bg-fiord-900 min-h-screen min-w-full">
+    <div className="flex min-h-screen min-w-full">
       {!fetched && <div className="spinner min-h-screen min-w-full"></div>}
       {fetched && (
         <div className="flex flex-col p-5 font-inter text-primary overflow-hidden antialiased">
