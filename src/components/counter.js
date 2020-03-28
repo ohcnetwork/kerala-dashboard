@@ -31,12 +31,12 @@ function Counter(props) {
             key={header}
             className={
               topBox[header] +
-              " flex-auto max-w-none mx-1 p-1 rounded-lg text-xs xl:text-base text-gray-900 "
+              " flex-auto max-w-none mx-1 p-1 xl:px-2 rounded-lg text-gray-900 "
             }
           >
             <div>
-              <h4>{lang[header]}</h4>
-              <p>{total[header]}</p>
+              <p className="font-medium uppercase text-xs md:text-base xl:text-base">{lang[header]}</p>
+              <p className="font-bold text-base md:text-lg xl:text-lg">{total[header]}</p>
             </div>
           </div>
         );
