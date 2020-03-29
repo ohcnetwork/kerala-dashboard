@@ -162,7 +162,10 @@ function Map(props) {
   return (
     <div className="flex relative rounded-lg p-4 bg-fiord-800 mb-4 avg:mb-0">
       <svg className="z-0" id="chart" height="517" ref={map}></svg>
-      <div className="z-40 flex-col absolute top-0 right-0 text-right text-xs md:text-base">
+      <div
+        className="z-40 flex-col absolute top-0 right-0 text-right text-xs md:text-base"
+        style={{ pointerEvents: "none" }}
+      >
         <div className="flex-col m-2 px-2 py-1 rounded-md bg-gradient-r-fiord-700 font-semibold">
           <p className="text-base lg:text-xl">{district.name}</p>
         </div>
