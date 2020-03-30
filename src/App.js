@@ -26,7 +26,7 @@ function App() {
     <div className="flex bg-fiord-900 min-h-screen min-w-full justify-center">
       {!fetched && <div className="spinner min-h-screen min-w-full"></div>}
       {fetched && (
-        <div className="flex flex-col p-5 font-inter text-primary overflow-hidden antialiased">
+        <div className="flex-1 flex-col p-5 font-inter text-primary overflow-hidden antialiased">
           <div className="flex flex-col avg:flex-row">
             <div className="flex-none avg:pr-2 avg:mr-auto mb-2 avg:mb-0">
               <p className="font-extrabold tracking-wider text-2xl sm:text-2xl md:text-3xl lg:text-4xl avg:text-5xl text-center avg:text-left">
@@ -42,10 +42,10 @@ function App() {
             </div>
           </div>
           <div className="flex flex-col avg:flex-row mt-4">
-            <div className="flex flex-col pl-0 avg:pl-2">
+            <div className="flex flex-col pl-0 avg:pl-2 avg:w-1/3">
               <Map districts={districts} />
             </div>
-            <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2">
+            <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
               <Table districts={districts} />
             </div>
           </div>

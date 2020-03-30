@@ -160,7 +160,7 @@ function Map(props) {
   }, [districts, statistic.maxConfirmed, statistic.total]);
 
   return (
-    <div className="flex relative rounded-lg p-4 bg-fiord-800 mb-4 avg:mb-0">
+    <div className="flex relative rounded-lg p-4 bg-fiord-800 mb-4 avg:mb-0 min-w-full">
       <svg className="z-0" id="chart" height="517" ref={map}></svg>
       <div
         className="z-40 flex-col absolute top-0 right-0 text-right text-xs md:text-base"
