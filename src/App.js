@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     if (fetched === false) {
       axios
-        .get("https://volunteer.coronasafe.network/api/reports")
+        .get("/latest.json")
         .then(response => {
           setDistricts(response.data.kerala);
           setFetched(true);
