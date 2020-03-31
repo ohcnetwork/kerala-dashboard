@@ -18,7 +18,7 @@ function Counter(props) {
 
   const topBox = {
     corona_positive: "bg-red-500",
-    under_home_isolation: "bg-yellow-500",
+    positive_admitted: "bg-yellow-500",
     cured_discharged: "bg-green-500",
     deaths: "bg-gray-500"
   };

@@ -15,13 +15,7 @@ function Map(props) {
       const first = Object.keys(districts)[0];
       setDistrict({
         name: first,
-        under_observation: districts[first].under_observation,
-        under_home_isolation: districts[first].under_home_isolation,
-        total_hospitalised: districts[first].total_hospitalised,
-        hospitalised_today: districts[first].hospitalised_today,
-        corona_positive: districts[first].corona_positive,
-        cured_discharged: districts[first].cured_discharged,
-        deaths: districts[first].deaths
+        ...districts[first]
       });
       let total = 0;
       let minConfirmed = 800000;
@@ -117,13 +111,7 @@ function Map(props) {
               const current = d.properties.DISTRICT;
               setDistrict({
                 name: current,
-                under_observation: districts[current].under_observation,
-                under_home_isolation: districts[current].under_home_isolation,
-                total_hospitalised: districts[current].total_hospitalised,
-                hospitalised_today: districts[current].hospitalised_today,
-                corona_positive: districts[current].corona_positive,
-                cured_discharged: districts[current].cured_discharged,
-                deaths: districts[current].deaths
+                ...districts[current]
               });
             }
             const target = d3.event.target;
@@ -161,7 +149,7 @@ function Map(props) {
 
   return (
     <div className="flex relative rounded-lg p-4 bg-fiord-800 mb-4 avg:mb-0 min-w-full">
-      <svg className="z-0" id="chart" height="517" ref={map}></svg>
+      <svg className="z-0" id="chart" height="535" ref={map}></svg>
       <div
         className="z-40 flex-col absolute top-0 right-0 text-right text-xs md:text-base"
         style={{ pointerEvents: "none" }}
