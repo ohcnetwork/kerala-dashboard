@@ -1,146 +1,146 @@
 {
 	"kerala": {
 		"Thiruvananthapuram": {
-			"under_observation": 12470,
-			"under_home_isolation": 12365,
-			"total_hospitalised": 105,
-			"hospitalised_today": 25,
+			"under_observation": 6663,
+			"under_home_isolation": 6571,
+			"total_hospitalised": 92,
+			"hospitalised_today": 23,
 			"corona_positive": 13,
-			"cured_discharged": 5,
+			"cured_discharged": 8,
 			"deaths": 1,
-			"positive_admitted": 8
+			"positive_admitted": 4
 		},
 		"Kollam": {
-			"under_observation": 11374,
-			"under_home_isolation": 11365,
+			"under_observation": 9237,
+			"under_home_isolation": 9221,
+			"total_hospitalised": 16,
+			"hospitalised_today": 2,
+			"corona_positive": 8,
+			"cured_discharged": 2,
+			"deaths": 0,
+			"positive_admitted": 6
+		},
+		"Pathanamthitta": {
+			"under_observation": 7355,
+			"under_home_isolation": 7340,
+			"total_hospitalised": 15,
+			"hospitalised_today": 6,
+			"corona_positive": 16,
+			"cured_discharged": 8,
+			"deaths": 0,
+			"positive_admitted": 8
+		},
+		"Idukki": {
+			"under_observation": 4255,
+			"under_home_isolation": 4246,
 			"total_hospitalised": 9,
-			"hospitalised_today": 1,
-			"corona_positive": 7,
-			"cured_discharged": 1,
+			"hospitalised_today": 0,
+			"corona_positive": 10,
+			"cured_discharged": 5,
 			"deaths": 0,
 			"positive_admitted": 5
 		},
-		"Pathanamthitta": {
-			"under_observation": 7716,
-			"under_home_isolation": 7700,
-			"total_hospitalised": 16,
-			"hospitalised_today": 3,
-			"corona_positive": 15,
-			"cured_discharged": 8,
-			"deaths": 0,
-			"positive_admitted": 7
-		},
-		"Idukki": {
-			"under_observation": 3723,
-			"under_home_isolation": 3715,
-			"total_hospitalised": 8,
-			"hospitalised_today": 0,
-			"corona_positive": 10,
-			"cured_discharged": 3,
-			"deaths": 0,
-			"positive_admitted": 7
-		},
 		"Kottayam": {
-			"under_observation": 3222,
-			"under_home_isolation": 3219,
+			"under_observation": 2552,
+			"under_home_isolation": 2549,
 			"total_hospitalised": 3,
-			"hospitalised_today": 3,
+			"hospitalised_today": 0,
 			"corona_positive": 3,
 			"cured_discharged": 3,
 			"deaths": 0,
 			"positive_admitted": 0
 		},
 		"Alappuzha": {
-			"under_observation": 8743,
-			"under_home_isolation": 8731,
-			"total_hospitalised": 12,
-			"hospitalised_today": 3,
-			"corona_positive": 3,
-			"cured_discharged": 1,
+			"under_observation": 7661,
+			"under_home_isolation": 7646,
+			"total_hospitalised": 15,
+			"hospitalised_today": 1,
+			"corona_positive": 5,
+			"cured_discharged": 2,
 			"deaths": 0,
-			"positive_admitted": 2
+			"positive_admitted": 3
 		},
 		"Ernakulam": {
-			"under_observation": 707,
-			"under_home_isolation": 672,
-			"total_hospitalised": 35,
-			"hospitalised_today": 1,
+			"under_observation": 3090,
+			"under_home_isolation": 3061,
+			"total_hospitalised": 29,
+			"hospitalised_today": 5,
 			"corona_positive": 25,
-			"cured_discharged": 5,
+			"cured_discharged": 9,
 			"deaths": 1,
-			"positive_admitted": 18
+			"positive_admitted": 14
 		},
 		"Thrissur": {
-			"under_observation": 14716,
-			"under_home_isolation": 14677,
-			"total_hospitalised": 39,
-			"hospitalised_today": 4,
-			"corona_positive": 12,
-			"cured_discharged": 3,
+			"under_observation": 15716,
+			"under_home_isolation": 15680,
+			"total_hospitalised": 36,
+			"hospitalised_today": 2,
+			"corona_positive": 13,
+			"cured_discharged": 6,
 			"deaths": 0,
-			"positive_admitted": 9
+			"positive_admitted": 7
 		},
 		"Palakkad": {
-			"under_observation": 18427,
-			"under_home_isolation": 18395,
-			"total_hospitalised": 32,
-			"hospitalised_today": 10,
+			"under_observation": 17454,
+			"under_home_isolation": 17418,
+			"total_hospitalised": 36,
+			"hospitalised_today": 12,
 			"corona_positive": 7,
 			"cured_discharged": 0,
 			"deaths": 0,
 			"positive_admitted": 7
 		},
 		"Malappuram": {
-			"under_observation": 16453,
-			"under_home_isolation": 16285,
-			"total_hospitalised": 168,
-			"hospitalised_today": 11,
-			"corona_positive": 15,
+			"under_observation": 14136,
+			"under_home_isolation": 14018,
+			"total_hospitalised": 118,
+			"hospitalised_today": 50,
+			"corona_positive": 16,
 			"cured_discharged": 2,
 			"deaths": 0,
-			"positive_admitted": 13
+			"positive_admitted": 14
 		},
 		"Kozhikode": {
-			"under_observation": 21934,
-			"under_home_isolation": 21897,
-			"total_hospitalised": 37,
-			"hospitalised_today": 13,
+			"under_observation": 20049,
+			"under_home_isolation": 20025,
+			"total_hospitalised": 24,
+			"hospitalised_today": 9,
 			"corona_positive": 12,
-			"cured_discharged": 3,
-			"deaths": 0,
-			"positive_admitted": 11
-		},
-		"Wayanad": {
-			"under_observation": 11588,
-			"under_home_isolation": 11579,
-			"total_hospitalised": 9,
-			"hospitalised_today": 2,
-			"corona_positive": 3,
-			"cured_discharged": 0,
-			"deaths": 0,
-			"positive_admitted": 3
-		},
-		"Kannur": {
-			"under_observation": 10895,
-			"under_home_isolation": 10794,
-			"total_hospitalised": 101,
-			"hospitalised_today": 30,
-			"corona_positive": 50,
-			"cured_discharged": 20,
-			"deaths": 0,
-			"positive_admitted": 48
-		},
-		"Kasaragod": {
-			"under_observation": 10836,
-			"under_home_isolation": 10615,
-			"total_hospitalised": 221,
-			"hospitalised_today": 16,
-			"corona_positive": 152,
 			"cured_discharged": 5,
 			"deaths": 0,
-			"positive_admitted": 128
+			"positive_admitted": 9
+		},
+		"Wayanad": {
+			"under_observation": 12102,
+			"under_home_isolation": 12092,
+			"total_hospitalised": 10,
+			"hospitalised_today": 2,
+			"corona_positive": 3,
+			"cured_discharged": 2,
+			"deaths": 0,
+			"positive_admitted": 1
+		},
+		"Kannur": {
+			"under_observation": 9403,
+			"under_home_isolation": 9311,
+			"total_hospitalised": 92,
+			"hospitalised_today": 17,
+			"corona_positive": 57,
+			"cured_discharged": 26,
+			"deaths": 0,
+			"positive_admitted": 49
+		},
+		"Kasaragod": {
+			"under_observation": 10801,
+			"under_home_isolation": 10547,
+			"total_hospitalised": 254,
+			"hospitalised_today": 40,
+			"corona_positive": 157,
+			"cured_discharged": 6,
+			"deaths": 0,
+			"positive_admitted": 132
 		}
 	},
-	"time": "2020-04-06T20:35:23.388413",
-	"file_url": "http://dhs.kerala.gov.in/wp-content/uploads/2020/04/Daily-Bulletin-HFWD-English-April-6-1.pdf"
+	"time": "2020-04-09T03:11:26.207230",
+	"file_url": "http://dhs.kerala.gov.in/wp-content/uploads/2020/04/Daily-Bulletin-HFWD-English-April-8.pdf"
 }
