@@ -6,6 +6,7 @@ import axios from "axios";
 
 function App() {
   const [districts, setDistricts] = useState({});
+  const [lastupdated, setLastUpdated] = useState("");
   const [fetched, setFetched] = useState(false);
 
   useEffect(() => {
@@ -14,6 +15,7 @@ function App() {
         .get("https://kerala-stats.now.sh/api")
         .then(response => {
           setDistricts(response.data.kerala);
+          setLastUpdated(response.data.last_updated)
           setFetched(true);
         })
         .catch(err => {
@@ -33,7 +35,7 @@ function App() {
                 KERALA COVID-19 TRACKER
               </p>
               <p className="text-sm text-center avg:text-left">
-                Updated daily with data from Directorate of Health Services,
+                Last updated on {lastupdated} with data from Directorate of Health Services,
                 Kerala
               </p>
             </div>
