@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     if (fetched === false) {
       axios
-        .get("/latest.json")
+        .get("https://kerala-stats.now.sh/api")
         .then(response => {
           setDistricts(response.data.kerala);
           setFetched(true);
