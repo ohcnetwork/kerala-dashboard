@@ -21,7 +21,7 @@ function Map({ districts, total, maxConfirmed }) {
   }, [total]);
 
   useEffect(() => {
-    if (map.current && renderData) {
+    if (renderData) {
       d3.selectAll("svg > *").remove();
       const svg = d3.select(map.current);
       const topology = topojson.feature(
@@ -29,7 +29,7 @@ function Map({ districts, total, maxConfirmed }) {
         renderData.objects.kerala_district
       );
       const projection = d3.geoMercator();
-      projection.fitHeight(+svg.attr("height"), topology);
+      projection.fitHeight(mapHeight, topology);
       const path = d3.geoPath(projection);
       const maxInterpolation = 0.8;
       const color = d3
@@ -124,14 +124,7 @@ function Map({ districts, total, maxConfirmed }) {
         .scale(color);
       svg.select(".legend").call(legend);
     }
-  }, [
-    districts,
-    maxConfirmed,
-    renderData,
-    resetDistrict,
-    total.confirmed,
-    width,
-  ]);
+  }, [districts, mapHeight, maxConfirmed, renderData, resetDistrict, total.confirmed, width]);
 
   useEffect(() => {
     if (Object.keys(districts).length > 0 && map.current && total.confirmed) {
