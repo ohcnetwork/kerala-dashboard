@@ -4,7 +4,7 @@ import lang from "./lang";
 function Table({ districts, total }) {
   const [data, setData] = useState([]);
   const [sortData, setSortData] = useState({
-    sortColumn: "corona_positive",
+    sortColumn: "confirmed",
     isAscending: false,
   });
 

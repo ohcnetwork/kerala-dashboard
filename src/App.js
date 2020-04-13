@@ -5,23 +5,24 @@ import Counter from "./components/counter";
 import axios from "axios";
 
 function App() {
-  const [districts, setDistricts] = useState({});
+  const [history, setHistory] = useState([]);
+  const [latest, setLatest] = useState({});
+  const [maxConfirmed, setMaxConfirmed] = useState(0);
   const [lastupdated, setLastUpdated] = useState("");
-  const [statistics, setStatistics] = useState({});
+  const [total, setTotal] = useState({});
   const [fetched, setFetched] = useState(false);
 
   useEffect(() => {
     if (fetched === false) {
       (async () => {
-        const response = await axios.get("https://kerala-stats.now.sh/api");
-        const dist = response.data.kerala;
-        let minConfirmed = 800000;
-        let maxConfirmed = 0;
+        let response = await axios.get("https://kerala-stats.now.sh/history");
+        let dist =
+          response.data.history[response.data.history.length - 1].kerala;
+        let mx = 0;
         for (const d in dist) {
-          if (dist[d].corona_positive < minConfirmed)
-            minConfirmed = dist[d].corona_positive;
-          if (dist[d].corona_positive > maxConfirmed)
-            maxConfirmed = dist[d].corona_positive;
+          if (dist[d].confirmed > mx) {
+            mx = dist[d].confirmed;
+          }
         }
         let total = {};
         let keys = Object.keys(dist[Object.keys(dist)[0]]);
@@ -29,12 +30,10 @@ function App() {
         for (const d in dist) {
           keys.forEach((k) => (total[k] += +dist[d][k]));
         }
-        setDistricts(response.data.kerala);
-        setStatistics({
-          total: total,
-          maxConfirmed: maxConfirmed,
-          minConfirmed: minConfirmed,
-        });
+        setMaxConfirmed(mx);
+        setHistory(response.data.history);
+        setLatest(dist);
+        setTotal(total);
         setLastUpdated(response.data.last_updated);
         setFetched(true);
       })();
@@ -57,19 +56,19 @@ function App() {
               </p>
             </div>
             <div className="flex flex-col pl-0 avg:pl-2">
-              <Counter total={statistics.total} />
+              <Counter total={total} />
             </div>
           </div>
           <div className="flex flex-col avg:flex-row mt-4">
             <div className="flex flex-col pl-0 avg:pl-2 avg:w-1/3">
               <Map
-                districts={districts}
-                total={statistics.total}
-                maxConfirmed={statistics.maxConfirmed}
+                districts={latest}
+                total={total}
+                maxConfirmed={maxConfirmed}
               />
             </div>
             <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
-              <Table districts={districts} total={statistics.total} />
+              <Table districts={latest} total={total} />
             </div>
           </div>
         </div>

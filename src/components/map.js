@@ -43,7 +43,7 @@ function Map({ districts, total, maxConfirmed }) {
         .enter()
         .append("path")
         .attr("fill", function (d) {
-          const n = districts[d.properties.district].corona_positive;
+          const n = districts[d.properties.district].confirmed;
           return d3.interpolateReds((maxInterpolation * n) / maxConfirmed);
         })
         .attr("d", path)
@@ -72,8 +72,8 @@ function Map({ districts, total, maxConfirmed }) {
           return (
             parseFloat(
               100 *
-                (parseInt(districts[d.properties.district].corona_positive) /
-                  total.corona_positive)
+                (parseInt(districts[d.properties.district].confirmed) /
+                  total.confirmed)
             ).toFixed(2) +
             "% from " +
             d.properties.district
@@ -129,23 +129,19 @@ function Map({ districts, total, maxConfirmed }) {
     maxConfirmed,
     renderData,
     resetDistrict,
-    total.corona_positive,
+    total.confirmed,
     width,
   ]);
 
   useEffect(() => {
-    if (
-      Object.keys(districts).length > 0 &&
-      map.current &&
-      total.corona_positive
-    ) {
+    if (Object.keys(districts).length > 0 && map.current && total.confirmed) {
       (async () => {
         const kerala = await d3.json("/kerala.json");
         resetDistrict();
         setRenderData(kerala);
       })();
     }
-  }, [districts, resetDistrict, total.corona_positive]);
+  }, [districts, resetDistrict, total.confirmed]);
 
   useEffect(() => {
     if (width >= 500) {

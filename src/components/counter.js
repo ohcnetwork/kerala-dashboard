@@ -3,10 +3,10 @@ import lang from "./lang";
 
 function Counter({ total }) {
   const topBox = {
-    corona_positive: "bg-red-500",
-    positive_admitted: "bg-yellow-500",
-    cured_discharged: "bg-green-500",
-    deaths: "bg-gray-500",
+    confirmed: "bg-red-500",
+    active: "bg-yellow-500",
+    recovered: "bg-green-500",
+    deceased: "bg-gray-500",
   };
 
   return (
