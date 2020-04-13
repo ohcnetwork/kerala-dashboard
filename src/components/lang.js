@@ -7,7 +7,7 @@ const lang = {
   under_observation: "Under Observation",
   total_hospitalised: "Hospital Isolation",
   under_home_isolation: "Home Isolation",
-  hospitalised_today: "Hospitalised Today"
+  hospitalised_today: "Hospitalised Today",
 };
 
 export default lang;

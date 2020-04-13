@@ -48,10 +48,10 @@ function App() {
         <div className="flex-1 flex-col p-5 font-inter text-primary overflow-hidden antialiased">
           <div className="flex flex-col avg:flex-row">
             <div className="flex-none avg:pr-2 avg:mr-auto mb-2 avg:mb-0">
-              <p className="font-extrabold tracking-wider text-2xl sm:text-2xl md:text-3xl lg:text-4xl avg:text-5xl text-center avg:text-left">
+              <p className="font-extrabold tracking-wider text-lg sm:text-xl md:text-2xl lg:text-3xl avg:text-5xl text-center avg:text-left">
                 KERALA COVID-19 TRACKER
               </p>
-              <p className="text-sm text-center avg:text-left">
+              <p className="text-mobile sm:text-sm text-center avg:text-left">
                 Last updated on {lastupdated} with data from Directorate of
                 Health Services, Kerala
               </p>
@@ -69,7 +69,7 @@ function App() {
               />
             </div>
             <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
-              <Table districts={districts} />
+              <Table districts={districts} total={statistics.total} />
             </div>
           </div>
         </div>

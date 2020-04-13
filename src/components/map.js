@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useCallback,useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import * as d3 from "d3";
 import { legendColor } from "d3-svg-legend";
 import * as topojson from "topojson";
 import lang from "./lang";
+import { useWindowWidth } from "@react-hook/window-size/throttled";
 
 function Map({ districts, total, maxConfirmed }) {
   const [district, setDistrict] = useState({});
+  const [curLang, setCurLang] = useState([]);
+  const [mapHeight, setMapHeight] = useState(0);
+  const width = useWindowWidth(450, { fps: 30, leading: true, wait: 0 });
   const map = useRef(null);
 
   const resetDistrict = useCallback(() => {
@@ -13,72 +17,35 @@ function Map({ districts, total, maxConfirmed }) {
       name: "All Districts",
       ...total,
     });
-  },[total]);
-  
+  }, [total]);
+
   useEffect(() => {
-    if (Object.keys(districts).length > 0 && map.current && total.corona_positive) {
+    if (
+      Object.keys(districts).length > 0 &&
+      map.current &&
+      total.corona_positive
+    ) {
       (async () => {
-        resetDistrict()
-
+        resetDistrict();
+        d3.selectAll("svg > *").remove();
+        const kerala = await d3.json("/kerala.json");
         const svg = d3.select(map.current);
-
-        const width = 450;
-        const height = 800;
-
-        const projection = d3
-          .geoMercator()
-          .center([76.85, 9.3])
-          .scale(height * 8)
-          .translate([width / 2, height / 2]);
-
+        const topology = topojson.feature(
+          kerala,
+          kerala.objects.kerala_district
+        );
+        const projection = d3.geoMercator();
+        projection.fitHeight(+svg.attr("height"), topology);
         const path = d3.geoPath(projection);
-
         const maxInterpolation = 0.8;
         const color = d3
           .scaleSequential(d3.interpolateReds)
           .domain([0, maxConfirmed / maxInterpolation]);
-
-        svg
-          .append("g")
-          .attr("class", "legend")
-          .attr("transform", "translate(5, 350)");
-
-        const numCells = 6;
-        const delta = Math.floor(
-          (maxConfirmed < numCells ? numCells : maxConfirmed) / (numCells - 1)
-        );
-        const cells = Array.from(Array(numCells).keys()).map((i) => i * delta);
-
-        function label({ i, genLength, generatedLabels }) {
-          if (i === genLength - 1) {
-            const n = Math.floor(generatedLabels[i]);
-            return `${n}+`;
-          } else {
-            const n1 = 1 + Math.floor(generatedLabels[i]);
-            const n2 = Math.floor(generatedLabels[i + 1]);
-            return `${n1} - ${n2}`;
-          }
-        }
-
-        const legend = legendColor()
-          .shapeWidth(30)
-          .cells(cells)
-          .titleWidth(3)
-          .labels(label)
-          .title("Confirmed Cases")
-          .orient("vertical")
-          .scale(color);
-
-        svg.select(".legend").call(legend);
-
-        const kerala = await d3.json("/kerala.json");
         svg
           .append("g")
           .attr("class", "kerala")
           .selectAll("path")
-          .data(
-            topojson.feature(kerala, kerala.objects.kerala_district).features
-          )
+          .data(topology.features)
           .enter()
           .append("path")
           .attr("fill", function (d) {
@@ -101,7 +68,7 @@ function Map({ districts, total, maxConfirmed }) {
               .attr("stroke-width", 2);
           })
           .on("mouseleave", (d) => {
-            resetDistrict()
+            resetDistrict();
             const target = d3.event.target;
             d3.select(target).attr("stroke", "None");
           })
@@ -118,7 +85,6 @@ function Map({ districts, total, maxConfirmed }) {
               d.properties.district
             );
           });
-
         svg
           .append("path")
           .attr("stroke", "#ff073a20")
@@ -128,30 +94,86 @@ function Map({ districts, total, maxConfirmed }) {
             "d",
             path(topojson.mesh(kerala, kerala.objects.kerala_district))
           );
+        if (width < 500) {
+          svg
+            .append("g")
+            .attr("class", "legend")
+            .attr("transform", "translate(5, 325)");
+        } else {
+          svg
+            .append("g")
+            .attr("class", "legend")
+            .attr("transform", "translate(5, 365)");
+        }
+        const numCells = 6;
+        const delta = Math.floor(
+          (maxConfirmed < numCells ? numCells : maxConfirmed) / (numCells - 1)
+        );
+        const cells = Array.from(Array(numCells).keys()).map((i) => i * delta);
+        function label({ i, genLength, generatedLabels }) {
+          if (i === genLength - 1) {
+            const n = Math.floor(generatedLabels[i]);
+            return `${n}+`;
+          } else {
+            const n1 = 1 + Math.floor(generatedLabels[i]);
+            const n2 = Math.floor(generatedLabels[i + 1]);
+            return `${n1} - ${n2}`;
+          }
+        }
+        const legend = legendColor()
+          .shapeWidth(30)
+          .cells(cells)
+          .titleWidth(3)
+          .labels(label)
+          .title("Confirmed Cases")
+          .orient("vertical")
+          .scale(color);
+        svg.select(".legend").call(legend);
       })();
     }
-  }, [districts, maxConfirmed, resetDistrict, total.corona_positive]);
+  }, [districts, maxConfirmed, resetDistrict, total.corona_positive, width]);
+
+  useEffect(() => {
+    if (width >= 500) {
+      setCurLang(Object.keys(lang).slice(1));
+      setMapHeight(545);
+    } else if (width > 370) {
+      setCurLang(Object.keys(lang).reverse().slice(0, 8));
+      setMapHeight(450);
+    } else {
+      setCurLang(Object.keys(lang).slice(1, 5));
+      setMapHeight(450);
+    }
+  }, [width]);
 
   return (
-    <div className="flex relative rounded-lg p-4 bg-fiord-800 mb-4 avg:mb-0 min-w-full">
-      <svg className="z-0" id="chart" height="535" ref={map}></svg>
+    <div className="flex flex-col relative rounded-lg p-4 bg-fiord-800 mb-4 avg:mb-0 min-w-full min-h-full">
+      <svg
+        className="z-0 min-h-full min-w-full text-mobile xs:text-base"
+        id="chart"
+        height={mapHeight}
+        ref={map}
+      ></svg>
       <div
-        className="z-40 flex-col absolute top-0 right-0 text-right text-xs md:text-base"
+        className={
+          "z-40 flex flex-grow flex-col absolute top-0 right-0 text-right text-mobile xs:text-base min-h-full items-end"
+        }
         style={{ pointerEvents: "none" }}
       >
-        <div className="flex-col m-2 px-2 py-1 rounded-md bg-gradient-r-fiord-700 font-semibold">
-          <p className="text-base lg:text-xl">{district.name}</p>
+        <div className="m-2 sm:px-2 px-1 sm:px-2 py-1 rounded-md bg-gradient-r-fiord-700 font-semibold">
+          <p className="text-sm xs:text-lg lg:text-xl">{district.name}</p>
         </div>
-        {Object.keys(lang)
-          .slice(1)
-          .map((k, i) => {
-            return (
-              <div className="flex-col m-2 px-2 py-1 rounded-md bg-gradient-r-fiord-700">
-                <p>{lang[k]}</p>
-                <p className="font-medium">{district[k]}</p>
-              </div>
-            );
-          })}
+        {curLang.map((k, i) => {
+          return (
+            <div
+              key={i}
+              className="mx-2 my-1 sm:my-1 px-1 sm:px-2 py-1 rounded-md bg-gradient-r-fiord-700 max-w-none"
+            >
+              <p>{lang[k]}</p>
+              <p className="font-medium">{district[k]}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
