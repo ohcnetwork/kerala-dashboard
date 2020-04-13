@@ -124,7 +124,15 @@ function Map({ districts, total, maxConfirmed }) {
         .scale(color);
       svg.select(".legend").call(legend);
     }
-  }, [districts, mapHeight, maxConfirmed, renderData, resetDistrict, total.confirmed, width]);
+  }, [
+    districts,
+    mapHeight,
+    maxConfirmed,
+    renderData,
+    resetDistrict,
+    total.confirmed,
+    width,
+  ]);
 
   useEffect(() => {
     if (Object.keys(districts).length > 0 && map.current && total.confirmed) {
