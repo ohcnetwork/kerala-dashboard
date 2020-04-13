@@ -51,17 +51,20 @@ function App() {
                 KERALA COVID-19 TRACKER
               </p>
               <div className="pt-1 sm:pt-0 leading-tight text-mobile sm:text-sm text-center avg:text-left">
-                <p>
+                <div>
                   <p className="inline font-semibold">Last Updated:</p>
                   {lastupdated}
-                </p>
-                <p>
-                  <p className="inline font-semibold">Source:</p>{" "}
-                  <a className="inline" href="http://dhs.kerala.gov.in/%E0%B4%A1%E0%B5%86%E0%B4%AF%E0%B4%BF%E0%B4%B2%E0%B4%BF-%E0%B4%AC%E0%B5%81%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%B1%E0%B5%8D%E0%B4%B1%E0%B4%BF%E0%B4%A8%E0%B5%8D%E2%80%8D/">
+                </div>
+                <div>
+                  <p className="inline font-semibold">Source: </p>
+                  <a
+                    className="inline"
+                    href="http://dhs.kerala.gov.in/%E0%B4%A1%E0%B5%86%E0%B4%AF%E0%B4%BF%E0%B4%B2%E0%B4%BF-%E0%B4%AC%E0%B5%81%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%B1%E0%B5%8D%E0%B4%B1%E0%B4%BF%E0%B4%A8%E0%B5%8D%E2%80%8D/"
+                  >
                     Daily Bulletin, Directorate of Health Service, Government of
                     Kerala
                   </a>
-                </p>
+                </div>
               </div>
             </div>
             <div className="flex flex-col pl-0 avg:pl-2">
