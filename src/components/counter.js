@@ -24,7 +24,8 @@ function Counter({ total }) {
               <p className="font-medium uppercase text-mobile xs:text-base">
                 {lang[header]}
               </p>
-              <p className="font-bold text-base avg:text-lg">{total[header]}</p>
+              <p className="leading-none font-bold text-base avg:text-lg">{total[header]}</p>
+              <p className="font-normal text-mobile ">{header !== "confirmed" && ((total[header]/total["confirmed"])*100).toFixed(2)+"%"}</p>
             </div>
           </div>
         );
