@@ -3,7 +3,7 @@ const lang = {
   confirmed: "Confirmed",
   active: "Active",
   recovered: "Recovered",
-  deceased: "Deceased",
+  deceased: "Deaths",
   total_obs: "Under Observation",
   hospital_obs: "Hospital Isolation",
   home_obs: "Home Isolation",

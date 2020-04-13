@@ -21,7 +21,7 @@ function Counter({ total }) {
             }
           >
             <div>
-              <p className="font-medium uppercase text-mobile xs:text-xs avg:text-base">
+              <p className="font-medium uppercase text-mobile xs:text-base">
                 {lang[header]}
               </p>
               <p className="font-bold text-base avg:text-lg">{total[header]}</p>
