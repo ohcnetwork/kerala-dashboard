@@ -7,20 +7,34 @@ import axios from "axios";
 function App() {
   const [districts, setDistricts] = useState({});
   const [lastupdated, setLastUpdated] = useState("");
+  const [statistic, setStatistic] = useState({});
   const [fetched, setFetched] = useState(false);
 
   useEffect(() => {
     if (fetched === false) {
-      axios
-        .get("https://kerala-stats.now.sh/api")
-        .then(response => {
-          setDistricts(response.data.kerala);
-          setLastUpdated(response.data.last_updated)
-          setFetched(true);
-        })
-        .catch(err => {
-          console.log(err);
+      (async () => {
+        const response = await axios.get("https://kerala-stats.now.sh/api");
+        const dist = response.data.kerala;
+        let total = 0;
+        let minConfirmed = 800000;
+        let maxConfirmed = 0;
+        for (const d in dist) {
+          total += dist[d].corona_positive;
+          if (dist[d].corona_positive < minConfirmed)
+            minConfirmed = dist[d].corona_positive;
+          if (dist[d].corona_positive > maxConfirmed)
+            maxConfirmed = dist[d].corona_positive;
+        }
+        setDistricts(response.data.kerala);
+        setStatistic({
+          total: total,
+          maxConfirmed: maxConfirmed,
+          minConfirmed: minConfirmed,
         });
+        setLastUpdated(response.data.last_updated);
+        console.log(total, maxConfirmed, minConfirmed);
+        setFetched(true);
+      })();
     }
   }, [fetched]);
 
@@ -35,8 +49,8 @@ function App() {
                 KERALA COVID-19 TRACKER
               </p>
               <p className="text-sm text-center avg:text-left">
-                Last updated on {lastupdated} with data from Directorate of Health Services,
-                Kerala
+                Last updated on {lastupdated} with data from Directorate of
+                Health Services, Kerala
               </p>
             </div>
             <div className="flex flex-col pl-0 avg:pl-2">
@@ -45,7 +59,7 @@ function App() {
           </div>
           <div className="flex flex-col avg:flex-row mt-4">
             <div className="flex flex-col pl-0 avg:pl-2 avg:w-1/3">
-              <Map districts={districts} />
+              <Map districts={districts} statistic={statistic} />
             </div>
             <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
               <Table districts={districts} />
