@@ -47,13 +47,22 @@ function App() {
         <div className="flex-1 flex-col p-5 font-inter text-primary overflow-hidden antialiased">
           <div className="flex flex-col avg:flex-row">
             <div className="flex-none avg:pr-2 avg:mr-auto mb-2 avg:mb-0">
-              <p className="font-extrabold tracking-wider text-lg sm:text-xl md:text-2xl lg:text-3xl avg:text-5xl text-center avg:text-left">
+              <p className="leading-none font-extrabold tracking-wider text-lg sm:text-xl md:text-2xl lg:text-3xl avg:text-5xl text-center avg:text-left">
                 KERALA COVID-19 TRACKER
               </p>
-              <p className="text-mobile sm:text-sm text-center avg:text-left">
-                Last updated on {lastupdated} with data from Directorate of
-                Health Services, Kerala
-              </p>
+              <div className="pt-1 sm:pt-0 leading-tight text-mobile sm:text-sm text-center avg:text-left">
+                <p>
+                  <p className="inline font-semibold">Last Updated:</p>
+                  {lastupdated}
+                </p>
+                <p>
+                  <p className="inline font-semibold">Source:</p>{" "}
+                  <a className="inline" href="http://dhs.kerala.gov.in/%E0%B4%A1%E0%B5%86%E0%B4%AF%E0%B4%BF%E0%B4%B2%E0%B4%BF-%E0%B4%AC%E0%B5%81%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%B1%E0%B5%8D%E0%B4%B1%E0%B4%BF%E0%B4%A8%E0%B5%8D%E2%80%8D/">
+                    Daily Bulletin, Directorate of Health Service, Government of
+                    Kerala
+                  </a>
+                </p>
+              </div>
             </div>
             <div className="flex flex-col pl-0 avg:pl-2">
               <Counter total={total} />
