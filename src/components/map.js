@@ -1,21 +1,24 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useCallback,useRef } from "react";
 import * as d3 from "d3";
 import { legendColor } from "d3-svg-legend";
 import * as topojson from "topojson";
 import lang from "./lang";
 
-function Map({ districts, statistic }) {
+function Map({ districts, total, maxConfirmed }) {
   const [district, setDistrict] = useState({});
   const map = useRef(null);
 
+  const resetDistrict = useCallback(() => {
+    setDistrict({
+      name: "All Districts",
+      ...total,
+    });
+  },[total]);
+  
   useEffect(() => {
-    if (Object.keys(districts).length > 0 && map.current && statistic.total) {
+    if (Object.keys(districts).length > 0 && map.current && total.corona_positive) {
       (async () => {
-        const first = Object.keys(districts)[0];
-        setDistrict({
-          name: first,
-          ...districts[first],
-        });
+        resetDistrict()
 
         const svg = d3.select(map.current);
 
@@ -33,7 +36,7 @@ function Map({ districts, statistic }) {
         const maxInterpolation = 0.8;
         const color = d3
           .scaleSequential(d3.interpolateReds)
-          .domain([0, statistic.maxConfirmed / maxInterpolation]);
+          .domain([0, maxConfirmed / maxInterpolation]);
 
         svg
           .append("g")
@@ -42,13 +45,10 @@ function Map({ districts, statistic }) {
 
         const numCells = 6;
         const delta = Math.floor(
-          (statistic.maxConfirmed < numCells
-            ? numCells
-            : statistic.maxConfirmed) /
-            (numCells - 1)
+          (maxConfirmed < numCells ? numCells : maxConfirmed) / (numCells - 1)
         );
         const cells = Array.from(Array(numCells).keys()).map((i) => i * delta);
-        
+
         function label({ i, genLength, generatedLabels }) {
           if (i === genLength - 1) {
             const n = Math.floor(generatedLabels[i]);
@@ -83,9 +83,7 @@ function Map({ districts, statistic }) {
           .append("path")
           .attr("fill", function (d) {
             const n = districts[d.properties.district].corona_positive;
-            return d3.interpolateReds(
-              (maxInterpolation * n) / statistic.maxConfirmed
-            );
+            return d3.interpolateReds((maxInterpolation * n) / maxConfirmed);
           })
           .attr("d", path)
           .attr("pointer-events", "all")
@@ -103,6 +101,7 @@ function Map({ districts, statistic }) {
               .attr("stroke-width", 2);
           })
           .on("mouseleave", (d) => {
+            resetDistrict()
             const target = d3.event.target;
             d3.select(target).attr("stroke", "None");
           })
@@ -113,7 +112,7 @@ function Map({ districts, statistic }) {
               parseFloat(
                 100 *
                   (parseInt(districts[d.properties.district].corona_positive) /
-                    statistic.total)
+                    total.corona_positive)
               ).toFixed(2) +
               "% from " +
               d.properties.district
@@ -131,7 +130,7 @@ function Map({ districts, statistic }) {
           );
       })();
     }
-  }, [districts, statistic]);
+  }, [districts, maxConfirmed, resetDistrict, total.corona_positive]);
 
   return (
     <div className="flex relative rounded-lg p-4 bg-fiord-800 mb-4 avg:mb-0 min-w-full">
