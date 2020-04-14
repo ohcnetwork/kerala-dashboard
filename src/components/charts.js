@@ -19,7 +19,9 @@ function Charts({ data }) {
   return (
     <div className="flex flex-col md:flex-row mb-4 xs:mt-0">
       {Object.keys(colorMap).map((k, i) => {
-        return <Chart data={chartData} dataKey={k} stroke={colorMap[k]} />;
+        return (
+          <Chart key={i} data={chartData} dataKey={k} stroke={colorMap[k]} />
+        );
       })}
     </div>
   );
