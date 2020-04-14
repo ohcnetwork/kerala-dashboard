@@ -10,6 +10,7 @@ function Map({ districts, total, maxConfirmed }) {
   const [renderData, setRenderData] = useState(null);
   const [curLang, setCurLang] = useState([]);
   const [mapHeight, setMapHeight] = useState(0);
+  const [legendPos, setLegendPos] = useState(0);
   const width = useWindowWidth(450, { fps: 30, leading: true, wait: 0 });
   const map = useRef(null);
 
@@ -22,7 +23,7 @@ function Map({ districts, total, maxConfirmed }) {
 
   useEffect(() => {
     if (renderData) {
-      d3.selectAll("svg > *").remove();
+      d3.selectAll("svg#chart > *").remove();
       const svg = d3.select(map.current);
       const topology = topojson.feature(
         renderData,
@@ -69,15 +70,11 @@ function Map({ districts, total, maxConfirmed }) {
         .style("cursor", "pointer")
         .append("title")
         .text(function (d) {
-          return (
-            parseFloat(
-              100 *
-                (parseInt(districts[d.properties.district].confirmed) /
-                  total.confirmed)
-            ).toFixed(2) +
-            "% from " +
-            d.properties.district
-          );
+          return `${parseFloat(
+            100 *
+              (parseInt(districts[d.properties.district].confirmed) /
+                total.confirmed)
+          ).toFixed(2)}% from ${d.properties.district}`;
         });
       svg
         .append("path")
@@ -88,17 +85,10 @@ function Map({ districts, total, maxConfirmed }) {
           "d",
           path(topojson.mesh(renderData, renderData.objects.kerala_district))
         );
-      if (width < 500) {
-        svg
-          .append("g")
-          .attr("class", "legend")
-          .attr("transform", "translate(5, 325)");
-      } else {
-        svg
-          .append("g")
-          .attr("class", "legend")
-          .attr("transform", "translate(5, 365)");
-      }
+      svg
+        .append("g")
+        .attr("class", "legend")
+        .attr("transform", `translate(5,${legendPos})`);
       const numCells = 6;
       const delta = Math.floor(
         (maxConfirmed < numCells ? numCells : maxConfirmed) / (numCells - 1)
@@ -126,6 +116,7 @@ function Map({ districts, total, maxConfirmed }) {
     }
   }, [
     districts,
+    legendPos,
     mapHeight,
     maxConfirmed,
     renderData,
@@ -145,20 +136,27 @@ function Map({ districts, total, maxConfirmed }) {
   }, [districts, resetDistrict, total.confirmed]);
 
   useEffect(() => {
-    if (width >= 500) {
+    if (width > 1440) {
+      setCurLang(Object.keys(lang).slice(1));
+      setMapHeight(600);
+      setLegendPos(420);
+    } else if (width >= 500) {
       setCurLang(Object.keys(lang).slice(1));
       setMapHeight(545);
+      setLegendPos(365);
     } else if (width > 370) {
       setCurLang(Object.keys(lang).reverse().slice(0, 8));
       setMapHeight(450);
+      setLegendPos(325);
     } else {
       setCurLang(Object.keys(lang).slice(1, 5));
       setMapHeight(450);
+      setLegendPos(325);
     }
   }, [width]);
 
   return (
-    <div className="flex flex-col relative rounded-lg p-4 bg-fiord-800 mb-4 avg:mb-0 min-w-full min-h-full">
+    <div className="flex flex-col relative rounded-lg p-4 bg-fiord-800 avg:mb-0 min-w-full min-h-full">
       <svg
         className="z-0 min-h-full min-w-full text-mobile xs:text-base"
         id="chart"

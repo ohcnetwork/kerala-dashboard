@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import Map from "./components/map";
 import Table from "./components/table";
 import Counter from "./components/counter";
+import Charts from "./components/charts";
 import axios from "axios";
+import lang from "./components/lang";
 
 function App() {
   const [history, setHistory] = useState([]);
@@ -11,6 +13,7 @@ function App() {
   const [lastupdated, setLastUpdated] = useState("");
   const [total, setTotal] = useState({});
   const [fetched, setFetched] = useState(false);
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     if (fetched === false) {
@@ -18,6 +21,7 @@ function App() {
         let response = await axios.get("https://kerala-stats.now.sh/history");
         let dist =
           response.data.history[response.data.history.length - 1].kerala;
+        let hist = response.data.history;
         let mx = 0;
         for (const d in dist) {
           if (dist[d].confirmed > mx) {
@@ -25,13 +29,26 @@ function App() {
           }
         }
         let total = {};
-        let keys = Object.keys(dist[Object.keys(dist)[0]]);
+        let keys = Object.keys(lang).splice(1);
         keys.forEach((k) => (total[k] = 0));
         for (const d in dist) {
           keys.forEach((k) => (total[k] += +dist[d][k]));
         }
+        let tmp = [];
+        hist.forEach((e) => {
+          let tmpData = {};
+          keys.forEach((k) => (tmpData[k] = 0));
+          Object.keys(e.kerala).forEach((d) => {
+            keys.forEach((k) => (tmpData[k] += e.kerala[d][k]));
+          });
+          tmp.push({
+            date: e.date,
+            ...tmpData,
+          });
+        });
+        setChartData(tmp);
         setMaxConfirmed(mx);
-        setHistory(response.data.history);
+        setHistory(hist);
         setLatest(dist);
         setTotal(total);
         setLastUpdated(response.data.last_updated);
@@ -80,6 +97,7 @@ function App() {
               />
             </div>
             <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
+              <Charts data={chartData} />
               <Table districts={latest} total={total} />
             </div>
           </div>

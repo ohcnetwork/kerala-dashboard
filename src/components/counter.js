@@ -15,10 +15,7 @@ function Counter({ total }) {
         return (
           <div
             key={header}
-            className={
-              topBox[header] +
-              " flex-auto avg:flex-shrink-0 max-w-none mx-1 p-1 avg:px-2 rounded-lg text-gray-900 "
-            }
+            className={`${topBox[header]} flex-auto avg:flex-shrink-0 max-w-none mx-1 p-1 avg:px-2 rounded-lg text-gray-900`}
           >
             <div>
               <p className="font-medium uppercase text-mobile xs:text-base">
@@ -29,7 +26,7 @@ function Counter({ total }) {
               </p>
               <p className="font-normal text-mobile ">
                 {header !== "confirmed" &&
-                  ((total[header] / total["confirmed"]) * 100).toFixed(2) + "%"}
+                  `${((total[header] / total["confirmed"]) * 100).toFixed(2)}%`}
               </p>
             </div>
           </div>

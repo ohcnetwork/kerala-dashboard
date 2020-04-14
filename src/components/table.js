@@ -65,7 +65,7 @@ function Table({ districts, total }) {
   doSort();
 
   return (
-    <div className="flex flex-col text-mobile xs:text-base">
+    <div className="flex flex-col text-mobile xs:text-sm md:text-base avg:text-lg">
       <div className="rounded-lg bg-fiord-800 p-4 overflow-x-scroll md:overflow-hidden">
         <table className="table-auto">
           <thead>

@@ -16,6 +16,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
+    "recharts": "^1.8.5",
     "tailwindcss": "^1.2.0",
     "tailwindcss-border-gradients": "^2.0.3",
     "tailwindcss-gradients": "^3.0.0",

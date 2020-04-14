@@ -35,7 +35,7 @@ module.exports = {
         },
       },
       screens: {
-        avg: "1432px",
+        avg: "1440px",
         xs: "500px",
         mobile: "370px",
       },
@@ -45,7 +45,7 @@ module.exports = {
     radialGradientColors: (theme) => theme("colors"),
     conicGradientColors: (theme) => theme("colors"),
   },
-  variants: { spinner: ["responsive"] },
+  variants: { spinner: ["responsive"], margin: ["responsive", "last"] },
   plugins: [
     require("tailwindcss-spinner")(),
     require("tailwindcss-border-gradients")(),
