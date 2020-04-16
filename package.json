@@ -7,20 +7,15 @@
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^10.0.2",
     "@testing-library/user-event": "^10.0.2",
-    "autoprefixer": "^9.7.6",
     "axios": "^0.19.2",
-    "cssnano": "^4.1.10",
     "d3": "^5.15.1",
     "d3-geo": "^1.11.9",
     "d3-svg-legend": "^2.25.6",
-    "postcss-cli": "^7.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "recharts": "^1.8.5",
     "tailwindcss": "^1.2.0",
-    "tailwindcss-border-gradients": "^2.0.3",
-    "tailwindcss-gradients": "^3.0.0",
     "topojson": "^3.0.2"
   },
   "scripts": {
@@ -47,7 +42,12 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^9.7.6",
+    "postcss-cli": "^7.1.0",
+    "cssnano": "^4.1.10",
     "@fullhuman/postcss-purgecss": "^2.1.2",
-    "tailwindcss-spinner": "^1.0.0"
+    "tailwindcss-spinner": "^1.0.0",
+    "tailwindcss-border-gradients": "^2.0.3",
+    "tailwindcss-gradients": "^3.0.0"
   }
 }
