@@ -17,9 +17,10 @@ function Map({ districts, summary, maxActive }) {
   const resetDistrict = useCallback(() => {
     setDistrict({
       name: "All Districts",
-      ...summary,
+      ...summary.summary,
+      delta: summary.delta,
     });
-  }, [summary]);
+  }, [summary.delta, summary.summary]);
 
   useEffect(() => {
     if (renderData) {
@@ -44,7 +45,7 @@ function Map({ districts, summary, maxActive }) {
         .enter()
         .append("path")
         .attr("fill", function (d) {
-          const n = districts[d.properties.district].active;
+          const n = districts.summary[d.properties.district].active;
           return n === 0
             ? "#ffffff"
             : d3.interpolateReds((maxInterpolation * n) / maxActive);
@@ -52,11 +53,12 @@ function Map({ districts, summary, maxActive }) {
         .attr("d", path)
         .attr("pointer-events", "all")
         .on("mouseenter", (d) => {
-          if (districts[d.properties.district]) {
+          if (districts.summary[d.properties.district]) {
             const current = d.properties.district;
             setDistrict({
               name: current,
-              ...districts[current],
+              ...districts.summary[current],
+              delta: districts.delta[current],
             });
           }
           const target = d3.event.target;
@@ -74,8 +76,8 @@ function Map({ districts, summary, maxActive }) {
         .text(function (d) {
           return `${parseFloat(
             100 *
-              (parseInt(districts[d.properties.district].active) /
-                summary.active)
+              (parseInt(districts.summary[d.properties.district].active) /
+                summary.summary.active)
           ).toFixed(2)}% from ${d.properties.district}`;
         });
       svg
@@ -117,6 +119,7 @@ function Map({ districts, summary, maxActive }) {
       svg.select(".legend").call(legend);
     }
   }, [
+    district,
     districts,
     legendPos,
     mapHeight,
@@ -129,14 +132,18 @@ function Map({ districts, summary, maxActive }) {
   ]);
 
   useEffect(() => {
-    if (Object.keys(districts).length > 0 && map.current && summary.active) {
+    if (
+      Object.keys(districts.summary).length > 0 &&
+      map.current &&
+      summary.summary.active
+    ) {
       (async () => {
-        const kerala = await d3.json("/kerala.json");
         resetDistrict();
+        const kerala = await d3.json("/kerala.json");
         setRenderData(kerala);
       })();
     }
-  }, [districts, resetDistrict, summary.active]);
+  }, [districts.summary, resetDistrict, summary.summary.active]);
 
   useEffect(() => {
     if (width > 1440) {
@@ -182,7 +189,16 @@ function Map({ districts, summary, maxActive }) {
               className="mx-2 my-1 sm:my-1 px-1 sm:px-2 py-1 rounded-md bg-gradient-r-fiord-700 max-w-none"
             >
               <p>{lang[k]}</p>
-              <p className="font-medium">{district[k]}</p>
+              <div className="font-medium">
+                {district[k]}
+                <p className="inline text-mobile ml-1 text-fiord-400">
+                  {district.delta[k] > 0
+                    ? `+${district.delta[k]}`
+                    : district.delta[k] === 0
+                    ? "-"
+                    : district.delta[k]}
+                </p>
+              </div>
             </div>
           );
         })}

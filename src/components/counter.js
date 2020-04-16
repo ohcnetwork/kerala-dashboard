@@ -21,10 +21,17 @@ function Counter({ data }) {
               <p className="font-medium uppercase text-mobile xs:text-base">
                 {lang[header]}
               </p>
-              <p className="leading-none font-bold text-base avg:text-lg">
+              <div className="leading-none font-bold text-base avg:text-lg">
                 {data.summary[header]}
-              </p>
-              <p className="font-normal text-mobile ">
+                <p className="xs:inline xs:ml-1 align-middle text-mobile break-normal">
+                  {data.delta[header] > 0
+                    ? `+${data.delta[header]}`
+                    : data.delta[header] === 0
+                    ? "-"
+                    : data.delta[header]}
+                </p>
+              </div>
+              <p className="font-normal text-mobile">
                 {header !== "confirmed" &&
                   `${(
                     (data.summary[header] / data.summary["confirmed"]) *

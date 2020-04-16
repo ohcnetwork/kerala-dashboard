@@ -9,12 +9,13 @@ function Table({ districts, summary }) {
   });
 
   useEffect(() => {
-    if (Object.keys(districts).length > 0) {
+    if (Object.keys(districts.summary).length > 0) {
       const tmp = [];
-      for (const d in districts) {
+      for (const d in districts.summary) {
         tmp.push({
           district: d,
-          ...districts[d],
+          ...districts.summary[d],
+          delta: districts.delta[d],
         });
       }
       setData(tmp);
@@ -22,26 +23,25 @@ function Table({ districts, summary }) {
   }, [districts]);
 
   const doSort = () => {
-    data.sort((StateData1, StateData2) => {
+    data.sort((data1, data2) => {
       const sortColumn = sortData.sortColumn;
-      let value1 = StateData1[sortColumn];
-      let value2 = StateData2[sortColumn];
+      let value1 = data1[sortColumn];
+      let value2 = data2[sortColumn];
 
       if (sortColumn !== "district") {
-        value1 = parseInt(StateData1[sortColumn]);
-        value2 = parseInt(StateData2[sortColumn]);
+        value1 = parseInt(data1[sortColumn]);
+        value2 = parseInt(data2[sortColumn]);
       }
-
       if (sortData.isAscending) {
         return value1 > value2
           ? 1
-          : value1 === value2 && StateData1["district"] > StateData2["district"]
+          : value1 === value2 && data1["district"] > data2["district"]
           ? 1
           : -1;
       } else {
         return value1 < value2
           ? 1
-          : value1 === value2 && StateData1["district"] > StateData2["district"]
+          : value1 === value2 && data1["district"] > data2["district"]
           ? 1
           : -1;
       }
@@ -58,7 +58,7 @@ function Table({ districts, summary }) {
       isAscending:
         sortData.sortColumn === currentsortColumn
           ? !sortData.isAscending
-          : sortData.sortColumn === "state",
+          : sortData.sortColumn === "district",
     });
   };
 
@@ -97,6 +97,13 @@ function Table({ districts, summary }) {
                         key={index}
                       >
                         {district[header]}
+                        <p className="text-fiord-400 inline ml-1 text-mobilexs xs:text-mobile">
+                          {district["delta"][header] > 0
+                            ? `+${district["delta"][header]}`
+                            : district["delta"][header] === 0
+                            ? "-"
+                            : district["delta"][header]}
+                        </p>
                       </td>
                     );
                   })}
@@ -108,7 +115,18 @@ function Table({ districts, summary }) {
               {Object.keys(lang)
                 .slice(1)
                 .map((header, index) => {
-                  return <td key={index}>{summary[header]}</td>;
+                  return (
+                    <td key={index}>
+                      {summary.summary[header]}
+                      <p className="text-fiord-400 inline ml-1 text-mobilexs xs:text-mobile">
+                        {summary.delta[header] > 0
+                          ? `+${summary.delta[header]}`
+                          : summary.delta[header] === 0
+                          ? "-"
+                          : summary.delta[header]}
+                      </p>
+                    </td>
+                  );
                 })}
             </tr>
           </tbody>

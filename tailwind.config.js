@@ -18,6 +18,7 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
       },
       fontSize: {
+        mobilexs: ".55rem",
         mobile: ".65rem",
       },
       colors: {

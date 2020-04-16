@@ -14,7 +14,7 @@ function Chart({ data, dataKey, stroke }) {
   const CustomizedXAxisTick = ({ x, y, payload }) => {
     return (
       <g transform={`translate(${x},${y})`}>
-        <text className="text-xs" x={0} y={0} dy={16} fill="#666">
+        <text className="text-xs" x={0} y={0} dy={16} fill="#828997">
           {payload.value.split("-2020")[0]}
         </text>
       </g>
@@ -24,7 +24,7 @@ function Chart({ data, dataKey, stroke }) {
   const CustomizedYAxisTick = ({ x, y, payload }) => {
     return (
       <g transform={`translate(${x},${y})`}>
-        <text className="text-xs" x={0} y={0} fill="#666" textAnchor={"end"}>
+        <text className="text-xs" x={0} y={0} fill="#828997" textAnchor={"end"}>
           {payload.value}
         </text>
       </g>
@@ -64,8 +64,9 @@ function Chart({ data, dataKey, stroke }) {
             dataKey="date"
             tick={<CustomizedXAxisTick />}
             padding={{ right: 40 }}
+            stroke="#828997"
           />
-          <YAxis interval={0} tick={<CustomizedYAxisTick />} />
+          <YAxis interval={0} tick={<CustomizedYAxisTick />} stroke="#828997" />
           <Tooltip content={<CustomTooltip />} />
           <Legend
             align="right"
@@ -78,7 +79,8 @@ function Chart({ data, dataKey, stroke }) {
             stroke={stroke}
             strokeWidth={2}
             dot={false}
-            animationBegin={2000}
+            animationEasing="ease-in-out"
+            animationBegin={500}
             animationDuration={1500}
           />
         </LineChart>

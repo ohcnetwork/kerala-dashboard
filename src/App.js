@@ -21,13 +21,12 @@ function App() {
         let response = await axios.get(
           "https://keralastats.coronasafe.live/histories.json"
         );
-        let dist =
-          response.data.histories[response.data.histories.length - 1].summary;
         let hist = response.data.histories;
+        let dist = response.data.histories[response.data.histories.length - 1];
         let mx = 0;
-        for (const d in dist) {
-          if (dist[d].active > mx) {
-            mx = dist[d].active;
+        for (const d in dist.summary) {
+          if (dist.summary[d].active > mx) {
+            mx = dist.summary[d].active;
           }
         }
         response = await axios.get(
@@ -91,15 +90,11 @@ function App() {
           </div>
           <div className="flex flex-col avg:flex-row mt-4">
             <div className="flex flex-col pl-0 avg:pl-2 avg:w-1/3">
-              <Map
-                districts={latest}
-                summary={summary.summary}
-                maxActive={maxActive}
-              />
+              <Map districts={latest} summary={summary} maxActive={maxActive} />
             </div>
             <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
               <Charts data={chartData} />
-              <Table districts={latest} summary={summary.summary} />
+              <Table districts={latest} summary={summary} />
             </div>
           </div>
         </div>
