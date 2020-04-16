@@ -18,7 +18,6 @@ function App() {
   useEffect(() => {
     if (fetched === false) {
       (async () => {
-        // let response = await axios.get("https://keralastats.coronasafe.network/histories.json");
         let response = await axios.get(
           "https://keralastats.coronasafe.live/histories.json"
         );
