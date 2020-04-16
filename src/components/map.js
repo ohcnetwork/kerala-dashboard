@@ -45,7 +45,9 @@ function Map({ districts, summary, maxActive }) {
         .append("path")
         .attr("fill", function (d) {
           const n = districts[d.properties.district].active;
-          return d3.interpolateReds((maxInterpolation * n) / maxActive);
+          return n === 0
+            ? "#ffffff"
+            : d3.interpolateReds((maxInterpolation * n) / maxActive);
         })
         .attr("d", path)
         .attr("pointer-events", "all")
