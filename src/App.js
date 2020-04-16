@@ -9,7 +9,7 @@ import lang from "./components/lang";
 function App() {
   const [history, setHistory] = useState([]);
   const [latest, setLatest] = useState({});
-  const [maxConfirmed, setMaxConfirmed] = useState(0);
+  const [maxActive, setMaxActive] = useState(0);
   const [lastupdated, setLastUpdated] = useState("");
   const [summary, setSummary] = useState({});
   const [fetched, setFetched] = useState(false);
@@ -27,8 +27,8 @@ function App() {
         let hist = response.data.histories;
         let mx = 0;
         for (const d in dist) {
-          if (dist[d].confirmed > mx) {
-            mx = dist[d].confirmed;
+          if (dist[d].active > mx) {
+            mx = dist[d].active;
           }
         }
         response = await axios.get(
@@ -49,7 +49,7 @@ function App() {
           });
         });
         setChartData(tmp);
-        setMaxConfirmed(mx);
+        setMaxActive(mx);
         setHistory(hist);
         setLatest(dist);
         setSummary(summ);
@@ -95,7 +95,7 @@ function App() {
               <Map
                 districts={latest}
                 summary={summary.summary}
-                maxConfirmed={maxConfirmed}
+                maxActive={maxActive}
               />
             </div>
             <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">

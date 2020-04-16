@@ -5,7 +5,7 @@ import * as topojson from "topojson";
 import lang from "./lang";
 import { useWindowWidth } from "@react-hook/window-size/throttled";
 
-function Map({ districts, summary, maxConfirmed }) {
+function Map({ districts, summary, maxActive }) {
   const [district, setDistrict] = useState({});
   const [renderData, setRenderData] = useState(null);
   const [curLang, setCurLang] = useState([]);
@@ -35,7 +35,7 @@ function Map({ districts, summary, maxConfirmed }) {
       const maxInterpolation = 0.8;
       const color = d3
         .scaleSequential(d3.interpolateReds)
-        .domain([0, maxConfirmed / maxInterpolation]);
+        .domain([0, maxActive / maxInterpolation]);
       svg
         .append("g")
         .attr("class", "kerala")
@@ -44,8 +44,8 @@ function Map({ districts, summary, maxConfirmed }) {
         .enter()
         .append("path")
         .attr("fill", function (d) {
-          const n = districts[d.properties.district].confirmed;
-          return d3.interpolateReds((maxInterpolation * n) / maxConfirmed);
+          const n = districts[d.properties.district].active;
+          return d3.interpolateReds((maxInterpolation * n) / maxActive);
         })
         .attr("d", path)
         .attr("pointer-events", "all")
@@ -72,8 +72,8 @@ function Map({ districts, summary, maxConfirmed }) {
         .text(function (d) {
           return `${parseFloat(
             100 *
-              (parseInt(districts[d.properties.district].confirmed) /
-                summary.confirmed)
+              (parseInt(districts[d.properties.district].active) /
+                summary.active)
           ).toFixed(2)}% from ${d.properties.district}`;
         });
       svg
@@ -91,7 +91,7 @@ function Map({ districts, summary, maxConfirmed }) {
         .attr("transform", `translate(5,${legendPos})`);
       const numCells = 6;
       const delta = Math.floor(
-        (maxConfirmed < numCells ? numCells : maxConfirmed) / (numCells - 1)
+        (maxActive < numCells ? numCells : maxActive) / (numCells - 1)
       );
       const cells = Array.from(Array(numCells).keys()).map((i) => i * delta);
       function label({ i, genLength, generatedLabels }) {
@@ -109,7 +109,7 @@ function Map({ districts, summary, maxConfirmed }) {
         .cells(cells)
         .titleWidth(3)
         .labels(label)
-        .title("Confirmed Cases")
+        .title("Active Cases")
         .orient("vertical")
         .scale(color);
       svg.select(".legend").call(legend);
@@ -118,23 +118,23 @@ function Map({ districts, summary, maxConfirmed }) {
     districts,
     legendPos,
     mapHeight,
-    maxConfirmed,
+    maxActive,
     renderData,
     resetDistrict,
     summary,
-    summary.confirmed,
+    summary.active,
     width,
   ]);
 
   useEffect(() => {
-    if (Object.keys(districts).length > 0 && map.current && summary.confirmed) {
+    if (Object.keys(districts).length > 0 && map.current && summary.active) {
       (async () => {
         const kerala = await d3.json("/kerala.json");
         resetDistrict();
         setRenderData(kerala);
       })();
     }
-  }, [districts, resetDistrict, summary.confirmed]);
+  }, [districts, resetDistrict, summary.active]);
 
   useEffect(() => {
     if (width > 1440) {
