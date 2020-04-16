@@ -6,7 +6,6 @@ import lang from "./lang";
 import { useWindowWidth } from "@react-hook/window-size/throttled";
 
 function Map({ districts, summary, maxConfirmed }) {
-
   const [district, setDistrict] = useState({});
   const [renderData, setRenderData] = useState(null);
   const [curLang, setCurLang] = useState([]);
@@ -115,14 +114,20 @@ function Map({ districts, summary, maxConfirmed }) {
         .scale(color);
       svg.select(".legend").call(legend);
     }
-  }, [districts, legendPos, mapHeight, maxConfirmed, renderData, resetDistrict, summary, summary.confirmed, width]);
+  }, [
+    districts,
+    legendPos,
+    mapHeight,
+    maxConfirmed,
+    renderData,
+    resetDistrict,
+    summary,
+    summary.confirmed,
+    width,
+  ]);
 
   useEffect(() => {
-    if (
-      Object.keys(districts).length > 0 &&
-      map.current &&
-      summary.confirmed
-    ) {
+    if (Object.keys(districts).length > 0 && map.current && summary.confirmed) {
       (async () => {
         const kerala = await d3.json("/kerala.json");
         resetDistrict();

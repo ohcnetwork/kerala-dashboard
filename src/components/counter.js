@@ -26,7 +26,10 @@ function Counter({ data }) {
               </p>
               <p className="font-normal text-mobile ">
                 {header !== "confirmed" &&
-                  `${((data.summary[header] / data.summary["confirmed"]) * 100).toFixed(2)}%`}
+                  `${(
+                    (data.summary[header] / data.summary["confirmed"]) *
+                    100
+                  ).toFixed(2)}%`}
               </p>
             </div>
           </div>
