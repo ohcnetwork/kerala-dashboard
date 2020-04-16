@@ -93,8 +93,12 @@ function App() {
               <Map districts={latest} summary={summary} maxActive={maxActive} />
             </div>
             <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
-              <Charts data={chartData} />
-              <Table districts={latest} summary={summary} />
+              <div>
+                <Charts data={chartData} />
+              </div>
+              <div className="flex-auto">
+                <Table districts={latest} summary={summary} />
+              </div>
             </div>
           </div>
         </div>

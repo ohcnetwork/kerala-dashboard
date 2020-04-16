@@ -191,7 +191,7 @@ function Map({ districts, summary, maxActive }) {
               <p>{lang[k]}</p>
               <div className="font-medium">
                 {district[k]}
-                <p className="inline text-mobile ml-1 text-fiord-400">
+                <p className="inline text-mobilexs sm:text-mobile ml-1 text-fiord-400 ">
                   {district.delta[k] > 0
                     ? `+${district.delta[k]}`
                     : district.delta[k] === 0

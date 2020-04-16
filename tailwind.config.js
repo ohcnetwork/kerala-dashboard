@@ -20,6 +20,7 @@ module.exports = {
       fontSize: {
         mobilexs: ".55rem",
         mobile: ".65rem",
+        sm2: ".965rem",
       },
       colors: {
         purps: "#9561E2",
@@ -47,7 +48,11 @@ module.exports = {
     radialGradientColors: (theme) => theme("colors"),
     conicGradientColors: (theme) => theme("colors"),
   },
-  variants: { spinner: ["responsive"], margin: ["responsive", "last"] },
+  variants: {
+    spinner: ["responsive"],
+    margin: ["responsive", "last"],
+    padding: ["responsive", "last"],
+  },
   plugins: [
     require("tailwindcss-spinner")(),
     require("tailwindcss-border-gradients")(),
