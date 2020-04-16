@@ -1,7 +1,7 @@
 import React from "react";
 import lang from "./lang";
 
-function Counter({ total }) {
+function Counter({ data }) {
   const topBox = {
     confirmed: "bg-red-500",
     active: "bg-yellow-500",
@@ -22,11 +22,11 @@ function Counter({ total }) {
                 {lang[header]}
               </p>
               <p className="leading-none font-bold text-base avg:text-lg">
-                {total[header]}
+                {data.summary[header]}
               </p>
               <p className="font-normal text-mobile ">
                 {header !== "confirmed" &&
-                  `${((total[header] / total["confirmed"]) * 100).toFixed(2)}%`}
+                  `${((data.summary[header] / data.summary["confirmed"]) * 100).toFixed(2)}%`}
               </p>
             </div>
           </div>

@@ -11,35 +11,37 @@ function App() {
   const [latest, setLatest] = useState({});
   const [maxConfirmed, setMaxConfirmed] = useState(0);
   const [lastupdated, setLastUpdated] = useState("");
-  const [total, setTotal] = useState({});
+  const [summary, setSummary] = useState({});
   const [fetched, setFetched] = useState(false);
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     if (fetched === false) {
       (async () => {
-        let response = await axios.get("https://kerala-stats.now.sh/history");
+        // let response = await axios.get("https://keralastats.coronasafe.network/histories.json");
+        let response = await axios.get(
+          "https://keralastats.coronasafe.live/histories.json"
+        );
         let dist =
-          response.data.history[response.data.history.length - 1].kerala;
-        let hist = response.data.history;
+          response.data.histories[response.data.histories.length - 1].summary;
+        let hist = response.data.histories;
         let mx = 0;
         for (const d in dist) {
           if (dist[d].confirmed > mx) {
             mx = dist[d].confirmed;
           }
         }
-        let total = {};
+        response = await axios.get(
+          "https://keralastats.coronasafe.live/summary.json"
+        );
+        let summ = response.data;
         let keys = Object.keys(lang).splice(1);
-        keys.forEach((k) => (total[k] = 0));
-        for (const d in dist) {
-          keys.forEach((k) => (total[k] += +dist[d][k]));
-        }
         let tmp = [];
         hist.forEach((e) => {
           let tmpData = {};
           keys.forEach((k) => (tmpData[k] = 0));
-          Object.keys(e.kerala).forEach((d) => {
-            keys.forEach((k) => (tmpData[k] += e.kerala[d][k]));
+          Object.keys(e.summary).forEach((d) => {
+            keys.forEach((k) => (tmpData[k] += e.summary[d][k]));
           });
           tmp.push({
             date: e.date,
@@ -50,7 +52,7 @@ function App() {
         setMaxConfirmed(mx);
         setHistory(hist);
         setLatest(dist);
-        setTotal(total);
+        setSummary(summ);
         setLastUpdated(response.data.last_updated);
         setFetched(true);
       })();
@@ -85,20 +87,20 @@ function App() {
               </div>
             </div>
             <div className="flex flex-col pl-0 avg:pl-2">
-              <Counter total={total} />
+              <Counter data={summary} />
             </div>
           </div>
           <div className="flex flex-col avg:flex-row mt-4">
             <div className="flex flex-col pl-0 avg:pl-2 avg:w-1/3">
               <Map
                 districts={latest}
-                total={total}
+                summary={summary.summary}
                 maxConfirmed={maxConfirmed}
               />
             </div>
             <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
               <Charts data={chartData} />
-              <Table districts={latest} total={total} />
+              <Table districts={latest} summary={summary.summary} />
             </div>
           </div>
         </div>

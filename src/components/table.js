@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import lang from "./lang";
 
-function Table({ districts, total }) {
+function Table({ districts, summary }) {
   const [data, setData] = useState([]);
   const [sortData, setSortData] = useState({
     sortColumn: "confirmed",
@@ -108,7 +108,7 @@ function Table({ districts, total }) {
               {Object.keys(lang)
                 .slice(1)
                 .map((header, index) => {
-                  return <td key={index}>{total[header]}</td>;
+                  return <td key={index}>{summary[header]}</td>;
                 })}
             </tr>
           </tbody>

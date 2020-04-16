@@ -5,7 +5,8 @@ import * as topojson from "topojson";
 import lang from "./lang";
 import { useWindowWidth } from "@react-hook/window-size/throttled";
 
-function Map({ districts, total, maxConfirmed }) {
+function Map({ districts, summary, maxConfirmed }) {
+
   const [district, setDistrict] = useState({});
   const [renderData, setRenderData] = useState(null);
   const [curLang, setCurLang] = useState([]);
@@ -17,9 +18,9 @@ function Map({ districts, total, maxConfirmed }) {
   const resetDistrict = useCallback(() => {
     setDistrict({
       name: "All Districts",
-      ...total,
+      ...summary,
     });
-  }, [total]);
+  }, [summary]);
 
   useEffect(() => {
     if (renderData) {
@@ -73,7 +74,7 @@ function Map({ districts, total, maxConfirmed }) {
           return `${parseFloat(
             100 *
               (parseInt(districts[d.properties.district].confirmed) /
-                total.confirmed)
+                summary.confirmed)
           ).toFixed(2)}% from ${d.properties.district}`;
         });
       svg
@@ -114,26 +115,21 @@ function Map({ districts, total, maxConfirmed }) {
         .scale(color);
       svg.select(".legend").call(legend);
     }
-  }, [
-    districts,
-    legendPos,
-    mapHeight,
-    maxConfirmed,
-    renderData,
-    resetDistrict,
-    total.confirmed,
-    width,
-  ]);
+  }, [districts, legendPos, mapHeight, maxConfirmed, renderData, resetDistrict, summary, summary.confirmed, width]);
 
   useEffect(() => {
-    if (Object.keys(districts).length > 0 && map.current && total.confirmed) {
+    if (
+      Object.keys(districts).length > 0 &&
+      map.current &&
+      summary.confirmed
+    ) {
       (async () => {
         const kerala = await d3.json("/kerala.json");
         resetDistrict();
         setRenderData(kerala);
       })();
     }
-  }, [districts, resetDistrict, total.confirmed]);
+  }, [districts, resetDistrict, summary.confirmed]);
 
   useEffect(() => {
     if (width > 1440) {
