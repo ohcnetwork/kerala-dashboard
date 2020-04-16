@@ -66,7 +66,7 @@ function Table({ districts, summary }) {
 
   return (
     <div className="flex flex-col text-mobile sm:text-sm avg:text-base fk:text-lg">
-      <div className="rounded-lg bg-fiord-800 p-4 overflow-x-scroll md:overflow-hidden">
+      <div className="rounded-lg bg-fiord-800 p-4 overflow-x-scroll lg:overflow-hidden">
         <table className="table min-w-full">
           <thead>
             <tr>
