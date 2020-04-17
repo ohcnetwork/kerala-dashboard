@@ -14,14 +14,6 @@ function Map({ districts, summary, maxActive }) {
   const width = useWindowWidth(450, { fps: 30, leading: true, wait: 0 });
   const map = useRef(null);
 
-  const resetDistrict = useCallback(() => {
-    setDistrict({
-      name: "All Districts",
-      ...summary.summary,
-      delta: summary.delta,
-    });
-  }, [summary.delta, summary.summary]);
-
   useEffect(() => {
     if (renderData) {
       d3.selectAll("svg#chart > *").remove();
@@ -67,7 +59,11 @@ function Map({ districts, summary, maxActive }) {
             .attr("stroke-width", 2);
         })
         .on("mouseleave", (d) => {
-          resetDistrict();
+          setDistrict({
+            name: "All Districts",
+            ...summary.summary,
+            delta: summary.delta,
+          });
           const target = d3.event.target;
           d3.select(target).attr("stroke", "None");
         })
@@ -119,16 +115,14 @@ function Map({ districts, summary, maxActive }) {
       svg.select(".legend").call(legend);
     }
   }, [
-    district,
-    districts,
+    districts.delta,
+    districts.summary,
     legendPos,
     mapHeight,
     maxActive,
     renderData,
-    resetDistrict,
-    summary,
-    summary.active,
-    width,
+    summary.delta,
+    summary.summary,
   ]);
 
   useEffect(() => {
@@ -138,12 +132,16 @@ function Map({ districts, summary, maxActive }) {
       summary.summary.active
     ) {
       (async () => {
-        resetDistrict();
+        setDistrict({
+          name: "All Districts",
+          ...summary.summary,
+          delta: summary.delta,
+        });
         const kerala = await d3.json("/kerala.json");
         setRenderData(kerala);
       })();
     }
-  }, [districts.summary, resetDistrict, summary.summary.active]);
+  }, [districts.summary, summary.delta, summary.summary]);
 
   useEffect(() => {
     if (width > 1440) {
