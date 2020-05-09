@@ -5,6 +5,7 @@ import Counter from "./components/counter";
 import Charts from "./components/charts";
 import axios from "axios";
 import lang from "./components/lang";
+import { hot } from "react-hot-loader";
 
 function App() {
   const [history, setHistory] = useState([]);
@@ -107,4 +108,4 @@ function App() {
   );
 }
 
-export default App;
+export default hot(module)(App);

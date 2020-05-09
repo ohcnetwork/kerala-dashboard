@@ -1,4 +1,6 @@
 module.exports = {
+  important: true,
+  purge: ["./public/**/*.html", "./src/**/*.jsx", "./src/**/*.js"],
   theme: {
     spinner: (theme) => ({
       default: {
