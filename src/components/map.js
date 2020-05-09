@@ -5,7 +5,7 @@ import * as topojson from "topojson";
 import lang from "./lang";
 import { useWindowWidth } from "@react-hook/window-size/throttled";
 
-function Map({ districts, summary, maxActive }) {
+function Map({ districts, summary, maxActive, zones }) {
   const [district, setDistrict] = useState({});
   const [renderData, setRenderData] = useState(null);
   const [curLang, setCurLang] = useState([]);
@@ -13,6 +13,12 @@ function Map({ districts, summary, maxActive }) {
   const [legendPos, setLegendPos] = useState(0);
   const width = useWindowWidth(450, { fps: 30, leading: true, wait: 0 });
   const map = useRef(null);
+  const color = {
+    containment: "text-blue-600",
+    red: "text-red-600",
+    orange: "text-orange-600",
+    green: "text-green-600",
+  };
 
   useEffect(() => {
     if (renderData) {
@@ -36,7 +42,7 @@ function Map({ districts, summary, maxActive }) {
         .data(topology.features)
         .enter()
         .append("path")
-        .attr("fill", function (d) {
+        .attr("fill", function(d) {
           const n = districts.summary[d.properties.district].active;
           return n === 0
             ? "#ffffff"
@@ -69,7 +75,7 @@ function Map({ districts, summary, maxActive }) {
         })
         .style("cursor", "pointer")
         .append("title")
-        .text(function (d) {
+        .text(function(d) {
           return `${parseFloat(
             100 *
               (parseInt(districts.summary[d.properties.district].active) /
@@ -144,7 +150,7 @@ function Map({ districts, summary, maxActive }) {
   }, [districts.summary, summary.delta, summary.summary]);
 
   useEffect(() => {
-    if (width > 1440) {
+    if (width >= 1280) {
       setCurLang(Object.keys(lang).slice(1));
       setMapHeight(600);
       setLegendPos(420);
@@ -153,7 +159,11 @@ function Map({ districts, summary, maxActive }) {
       setMapHeight(545);
       setLegendPos(365);
     } else if (width > 370) {
-      setCurLang(Object.keys(lang).reverse().slice(0, 8));
+      setCurLang(
+        Object.keys(lang)
+          .reverse()
+          .slice(0, 8)
+      );
       setMapHeight(450);
       setLegendPos(325);
     } else {
@@ -162,23 +172,22 @@ function Map({ districts, summary, maxActive }) {
       setLegendPos(325);
     }
   }, [width]);
-
   return (
-    <div className="flex flex-col relative rounded-lg p-4 bg-fiord-800 avg:mb-0 min-w-full min-h-full">
+    <div className="flex flex-col relative rounded-lg p-4 bg-fiord-800 avg2:mb-0 min-w-full min-h-full">
       <svg
-        className="z-0 min-h-full min-w-full text-mobile xs:text-base"
+        className="z-0 min-h-full min-w-full text-mobile avg2:text-base"
         id="chart"
         height={mapHeight}
         ref={map}
       ></svg>
       <div
         className={
-          "z-40 flex flex-grow flex-col absolute top-0 right-0 text-right text-mobile xs:text-base min-h-full items-end"
+          "z-40 flex flex-grow flex-col absolute top-0 right-0 text-right text-mobile avg2:text-base min-h-full items-end"
         }
         style={{ pointerEvents: "none" }}
       >
         <div className="m-2 sm:px-2 px-1 sm:px-2 py-1 rounded-md bg-gradient-r-fiord-700 font-semibold">
-          <p className="text-sm xs:text-lg lg:text-xl">{district.name}</p>
+          <p className="text-sm avg2:text-xl">{district.name}</p>
         </div>
         {curLang.map((k, i) => {
           return (
@@ -189,7 +198,7 @@ function Map({ districts, summary, maxActive }) {
               <p>{lang[k]}</p>
               <div className="font-medium">
                 {district[k]}
-                <p className="inline text-mobilexs sm:text-mobile ml-1 text-fiord-400 ">
+                <p className="inline text-mobilexs avg2:text-mobile ml-1 text-fiord-400 ">
                   {district.delta[k] > 0
                     ? `+${district.delta[k]}`
                     : district.delta[k] === 0
@@ -200,6 +209,12 @@ function Map({ districts, summary, maxActive }) {
             </div>
           );
         })}
+        {zones[district.name] && (
+          <div className="mx-2 my-1 sm:my-1 px-1 sm:px-2 py-1 rounded-md bg-gradient-r-fiord-700 max-w-none">
+            <p>Zone</p>
+            <div className={`font-medium capitalize ${color[zones[district.name]]}`}>{zones[district.name]}</div>
+          </div>
+        )}
       </div>
     </div>
   );

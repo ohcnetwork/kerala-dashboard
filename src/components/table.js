@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import lang from "./lang";
 
-function Table({ districts, summary }) {
+function Table({ districts, summary, zones }) {
   const [data, setData] = useState([]);
   const [sortData, setSortData] = useState({
     sortColumn: "confirmed",
     isAscending: false,
   });
+  const color = {
+    containment: "text-blue-600",
+    red: "text-red-600",
+    orange: "text-orange-600",
+    green: "text-green-600",
+  };
 
   useEffect(() => {
     if (Object.keys(districts.summary).length > 0) {
@@ -65,7 +71,7 @@ function Table({ districts, summary }) {
   doSort();
 
   return (
-    <div className="flex rounded-lg bg-fiord-800 p-4 overflow-x-scroll lg:overflow-hidden text-mobile sm:text-sm avg:text-sm2 fk:text-base min-h-full">
+    <div className="flex rounded-lg bg-fiord-800 p-4 overflow-x-scroll lg:overflow-hidden text-mobile sm:text-sm fk:text-base min-h-full">
       <table className="table min-w-full min-h-full">
         <thead>
           <tr>
@@ -92,7 +98,11 @@ function Table({ districts, summary }) {
                 {Object.keys(lang).map((header, index) => {
                   return (
                     <td
-                      className={header !== "district" ? "" : "text-blue-500"}
+                      className={
+                        header !== "district"
+                          ? ""
+                          : color[zones[district[header]]]
+                      }
                       key={index}
                     >
                       {district[header]}

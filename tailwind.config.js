@@ -40,7 +40,8 @@ module.exports = {
       },
       screens: {
         fk: "2560px",
-        avg: "1440px",
+        avg2: "1600px",
+        avg: "1279px",
         xs: "500px",
         mobile: "370px",
       },
