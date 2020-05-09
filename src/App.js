@@ -66,11 +66,11 @@ function App() {
           <div className="flex flex-col avg:flex-row">
             <div className="flex-none avg:pr-2 avg:mr-auto mb-2 avg:mb-0">
               <p className="leading-none font-extrabold tracking-wider text-lg sm:text-xl md:text-2xl lg:text-3xl avg:text-5xl text-center avg:text-left">
-                KERALA COVID-19 TRACKER
+                KERALA COVID-19 DASHBOARD
               </p>
               <div className="pt-1 sm:pt-0 leading-tight text-mobile sm:text-sm text-center avg:text-left">
                 <div>
-                  <p className="inline font-semibold">Last Updated:</p>
+                  <p className="inline font-semibold">Last Updated: </p>
                   {lastupdated}
                 </div>
                 <div>
