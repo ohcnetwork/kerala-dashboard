@@ -150,10 +150,10 @@ function Map({ districts, summary, maxActive, zones }) {
   }, [districts.summary, summary.delta, summary.summary]);
 
   useEffect(() => {
-    if (width >= 1280) {
+    if (width > 1280) {
       setCurLang(Object.keys(lang).slice(1));
-      setMapHeight(600);
-      setLegendPos(420);
+      setMapHeight(610);
+      setLegendPos(425);
     } else if (width >= 500) {
       setCurLang(Object.keys(lang).slice(1));
       setMapHeight(545);

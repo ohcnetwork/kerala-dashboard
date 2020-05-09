@@ -71,14 +71,16 @@ function Table({ districts, summary, zones }) {
   doSort();
 
   return (
-    <div className="flex rounded-lg bg-fiord-800 p-4 overflow-x-scroll lg:overflow-hidden text-mobile sm:text-sm fk:text-base min-h-full">
-      <table className="table min-w-full min-h-full">
+    <div className="flex rounded-lg bg-fiord-800 p-2 avg:p-4 overflow-x-scroll lg:overflow-hidden text-mobile lg:text-xs avg:text-sm fk:text-base h-full justify-center">
+      <table className="table min-h-full min-w-full">
         <thead>
           <tr>
             {Object.keys(lang).map((header, index) => {
               return (
                 <th
-                  className="text-left pr-4 last:pr-0"
+                  className={`text-left pr-2 last:pr-0 ${
+                    header !== "district" ? "text-center" : ""
+                  }`}
                   key={index}
                   onClick={(e) => handleSort(e)}
                 >
@@ -100,32 +102,35 @@ function Table({ districts, summary, zones }) {
                     <td
                       className={
                         header !== "district"
-                          ? ""
+                          ? "text-center"
                           : color[zones[district[header]]]
                       }
                       key={index}
                     >
                       {district[header]}
-                      <p className="text-fiord-400 inline ml-1 text-mobilexs xs:text-mobile truncate">
+                      <span className="text-fiord-400 ml-1 text-mobilexs xs:text-mobile truncate">
                         {district["delta"][header] > 0
                           ? `+${district["delta"][header]}`
                           : district["delta"][header] === 0
                           ? "-"
                           : district["delta"][header]}
-                      </p>
+                      </span>
                     </td>
                   );
                 })}
               </tr>
             );
           })}
-          <tr className="font-semibold py-64">
+          <tr className="font-semibold">
             <td>Total</td>
             {Object.keys(lang)
               .slice(1)
               .map((header, index) => {
                 return (
-                  <td key={index}>
+                  <td
+                    className={header !== "district" ? "text-center" : ""}
+                    key={index}
+                  >
                     {summary.summary[header]}
                     <p className="text-fiord-400 inline ml-1 text-mobilexs xs:text-mobile truncate">
                       {summary.delta[header] > 0

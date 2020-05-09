@@ -51,13 +51,13 @@ function App() {
         response = await axios.get(
           "https://keralastats.coronasafe.live/zones.json"
         );
-        let zones  = response.data.districts
+        let zones = response.data.districts;
         setChartData(tmp);
         setMaxActive(mx);
         setHistory(hist);
         setLatest(dist);
         setSummary(summ);
-        setZones(zones)
+        setZones(zones);
         setLastUpdated(response.data.last_updated);
         setFetched(true);
       })();
@@ -97,17 +97,19 @@ function App() {
           </div>
           <div className="flex flex-col avg:flex-row mt-4">
             <div className="flex flex-col pl-0 avg:pl-2 avg:w-1/3">
-              <Map districts={latest} summary={summary} maxActive={maxActive} zones={zones} />
+              <Map
+                districts={latest}
+                summary={summary}
+                maxActive={maxActive}
+                zones={zones}
+              />
             </div>
             <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
-              <div>
-                <Charts data={chartData} />
-              </div>
-              <div className="flex-auto">
-                <Table districts={latest} summary={summary} zones={zones}/>
-              </div>
+              <Charts data={chartData} />
+              <Table districts={latest} summary={summary} zones={zones} />
             </div>
           </div>
+          <div className="flex flex-col avg:flex-row mt-4"></div>
         </div>
       )}
     </div>

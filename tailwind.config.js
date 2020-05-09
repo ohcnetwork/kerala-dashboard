@@ -41,7 +41,7 @@ module.exports = {
       screens: {
         fk: "2560px",
         avg2: "1600px",
-        avg: "1279px",
+        avg: "1280px",
         xs: "500px",
         mobile: "370px",
       },
