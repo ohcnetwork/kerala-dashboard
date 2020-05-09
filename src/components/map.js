@@ -150,14 +150,14 @@ function Map({ districts, summary, maxActive, zones }) {
   }, [districts.summary, summary.delta, summary.summary]);
 
   useEffect(() => {
-    if (width > 1280) {
+    if (width >= 1280) {
       setCurLang(Object.keys(lang).slice(1));
       setMapHeight(610);
-      setLegendPos(425);
+      setLegendPos(480);
     } else if (width >= 500) {
       setCurLang(Object.keys(lang).slice(1));
       setMapHeight(545);
-      setLegendPos(365);
+      setLegendPos(415);
     } else if (width > 370) {
       setCurLang(
         Object.keys(lang)
@@ -212,7 +212,13 @@ function Map({ districts, summary, maxActive, zones }) {
         {zones[district.name] && (
           <div className="mx-2 my-1 sm:my-1 px-1 sm:px-2 py-1 rounded-md bg-gradient-r-fiord-700 max-w-none">
             <p>Zone</p>
-            <div className={`font-medium capitalize ${color[zones[district.name]]}`}>{zones[district.name]}</div>
+            <div
+              className={`font-medium capitalize ${
+                color[zones[district.name]]
+              }`}
+            >
+              {zones[district.name]}
+            </div>
           </div>
         )}
       </div>

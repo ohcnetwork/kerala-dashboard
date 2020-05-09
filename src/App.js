@@ -14,6 +14,7 @@ function App() {
   const [lastupdated, setLastUpdated] = useState("");
   const [summary, setSummary] = useState({});
   const [zones, setZones] = useState({});
+  const [hotspots, setHotspots] = useState({});
   const [fetched, setFetched] = useState(false);
   const [chartData, setChartData] = useState([]);
 
@@ -26,11 +27,10 @@ function App() {
         let hist = response.data.histories;
         let dist = response.data.histories[response.data.histories.length - 1];
         let mx = 0;
-        for (const d in dist.summary) {
-          if (dist.summary[d].active > mx) {
-            mx = dist.summary[d].active;
-          }
-        }
+        Object.keys(dist.summary).forEach(
+          (d) =>
+            (mx = dist.summary[d].active > mx ? dist.summary[d].active : mx)
+        );
         response = await axios.get(
           "https://keralastats.coronasafe.live/summary.json"
         );
@@ -52,6 +52,8 @@ function App() {
           "https://keralastats.coronasafe.live/zones.json"
         );
         let zones = response.data.districts;
+        let hotspots = {};
+        Object.keys(dist.summary);
         setChartData(tmp);
         setMaxActive(mx);
         setHistory(hist);
