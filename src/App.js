@@ -4,7 +4,7 @@ import Table from "./components/table";
 import Counter from "./components/counter";
 import Charts from "./components/charts";
 import axios from "axios";
-import lang from "./components/lang";
+import { lang } from "./constants";
 import { hot } from "react-hot-loader";
 
 function App() {
@@ -52,8 +52,19 @@ function App() {
           "https://keralastats.coronasafe.live/zones.json"
         );
         let zones = response.data.districts;
-        let hotspots = {};
-        Object.keys(dist.summary);
+        response = await axios.get(
+          "https://keralastats.coronasafe.live/hotspots.json"
+        );
+        let k1 = "district";
+        let k2 = "lsgd";
+        let hpts = response.data.hotspots.reduce(
+          (a, b) => ({
+            ...a,
+            [b[k1]]: a[b[k1]] ? a[b[k1]].concat(b[k2]) : [b[k2]],
+          }),
+          {}
+        );
+        setHotspots(hpts);
         setChartData(tmp);
         setMaxActive(mx);
         setHistory(hist);

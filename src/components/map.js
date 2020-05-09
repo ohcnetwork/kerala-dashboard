@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import * as d3 from "d3";
 import { legendColor } from "d3-svg-legend";
 import * as topojson from "topojson";
-import lang from "./lang";
+import { lang, zoneColor } from "../constants";
 import { useWindowWidth } from "@react-hook/window-size/throttled";
 
 function Map({ districts, summary, maxActive, zones }) {
@@ -13,12 +13,6 @@ function Map({ districts, summary, maxActive, zones }) {
   const [legendPos, setLegendPos] = useState(0);
   const width = useWindowWidth(450, { fps: 30, leading: true, wait: 0 });
   const map = useRef(null);
-  const color = {
-    containment: "text-blue-600",
-    red: "text-red-600",
-    orange: "text-orange-600",
-    green: "text-green-600",
-  };
 
   useEffect(() => {
     if (renderData) {
@@ -214,7 +208,7 @@ function Map({ districts, summary, maxActive, zones }) {
             <p>Zone</p>
             <div
               className={`font-medium capitalize ${
-                color[zones[district.name]]
+                zoneColor[zones[district.name]]
               }`}
             >
               {zones[district.name]}

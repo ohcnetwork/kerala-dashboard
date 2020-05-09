@@ -8,7 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import lang from "./lang";
+import { lang } from "../constants";
 
 function Chart({ data, dataKey, stroke }) {
   const CustomizedXAxisTick = ({ x, y, payload }) => {

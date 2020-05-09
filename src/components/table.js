@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import lang from "./lang";
+import { lang, zoneColor } from "../constants";
 
 function Table({ districts, summary, zones }) {
   const [data, setData] = useState([]);
@@ -7,12 +7,6 @@ function Table({ districts, summary, zones }) {
     sortColumn: "confirmed",
     isAscending: false,
   });
-  const color = {
-    containment: "text-blue-600",
-    red: "text-red-600",
-    orange: "text-orange-600",
-    green: "text-green-600",
-  };
 
   useEffect(() => {
     if (Object.keys(districts.summary).length > 0) {
@@ -103,7 +97,7 @@ function Table({ districts, summary, zones }) {
                       className={
                         header !== "district"
                           ? "text-center"
-                          : color[zones[district[header]]]
+                          : zoneColor[zones[district[header]]]
                       }
                       key={index}
                     >
