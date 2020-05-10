@@ -56,7 +56,7 @@ function App() {
         response = await axios.get(
           "https://keralastats.coronasafe.live/zones.json"
         );
-        let zones = response.data.districts;
+        let z = response.data.districts;
         response = await axios.get(
           "https://keralastats.coronasafe.live/testreports.json"
         );
@@ -95,7 +95,7 @@ function App() {
         setHistory(hist);
         setLatest(dist);
         setSummary(summ);
-        setZones(zones);
+        setZones(z);
         setLastUpdated(response.data.last_updated);
         setFetched(true);
       })();

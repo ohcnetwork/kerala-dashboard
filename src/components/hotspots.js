@@ -29,7 +29,7 @@ function ListItem({ h, d }) {
         <div>{d.length}</div>
       </div>
       {active &&
-        d.map((h) => <div className="ml-4 mb-0 last:mb-2 text-sm">{h}</div>)}
+        d.map((_h) => <div className="ml-4 mb-0 last:mb-2 text-sm">{_h}</div>)}
     </div>
   );
 }
