@@ -1,8 +1,4 @@
 const cssnano = require("cssnano");
-const purgecss = require("@fullhuman/postcss-purgecss")({
-  content: ["./public/**/*.html", "./src/**/*.js"],
-  defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
-});
 module.exports = {
   plugins: [
     require("tailwindcss"),
@@ -10,6 +6,5 @@ module.exports = {
     cssnano({
       preset: "default",
     }),
-    ...(process.env.NODE_ENV === "production" ? [purgecss] : []),
   ],
 };

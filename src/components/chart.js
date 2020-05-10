@@ -1,14 +1,14 @@
 import React from "react";
 import {
-  LineChart,
+  Legend,
   Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
 } from "recharts";
-import lang from "./lang";
+import { lang } from "../constants";
 
 function Chart({ data, dataKey, stroke }) {
   const CustomizedXAxisTick = ({ x, y, payload }) => {
@@ -23,11 +23,19 @@ function Chart({ data, dataKey, stroke }) {
 
   const CustomizedYAxisTick = ({ x, y, payload }) => {
     return (
-      <g transform={`translate(${x},${y})`}>
-        <text className="text-xs" x={0} y={0} fill="#828997" textAnchor={"end"}>
-          {payload.value}
-        </text>
-      </g>
+      Number.isInteger(payload.value) && (
+        <g transform={`translate(${x},${y})`}>
+          <text
+            className="text-xs"
+            x={0}
+            y={0}
+            fill="#828997"
+            textAnchor={"end"}
+          >
+            {payload.value}
+          </text>
+        </g>
+      )
     );
   };
 

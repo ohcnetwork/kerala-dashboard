@@ -1,4 +1,6 @@
 module.exports = {
+  important: true,
+  purge: ["./public/**/*.html", "./src/**/*.jsx", "./src/**/*.js"],
   theme: {
     spinner: (theme) => ({
       default: {
@@ -38,7 +40,8 @@ module.exports = {
       },
       screens: {
         fk: "2560px",
-        avg: "1440px",
+        avg2: "1600px",
+        avg: "1280px",
         xs: "500px",
         mobile: "370px",
       },
@@ -52,6 +55,9 @@ module.exports = {
     spinner: ["responsive"],
     margin: ["responsive", "last"],
     padding: ["responsive", "last"],
+    transitionProperty: ["responsive", "hover", "focus"],
+    rotate: ["responsive", "hover", "group-hover"],
+    scale: ["responsive", "hover", "group-hover"],
   },
   plugins: [
     require("tailwindcss-spinner")(),

@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { hot } from "react-hot-loader";
+import Charts from "./components/charts";
+import Counter from "./components/counter";
+import Hotspots from "./components/hotspots";
+import Links from "./components/links";
 import Map from "./components/map";
 import Table from "./components/table";
-import Counter from "./components/counter";
-import Charts from "./components/charts";
-import axios from "axios";
-import lang from "./components/lang";
+import Testing from "./components/testing";
+import Zones from "./components/zones";
+import { lang } from "./constants";
 
 function App() {
   const [history, setHistory] = useState([]);
@@ -12,6 +17,9 @@ function App() {
   const [maxActive, setMaxActive] = useState(0);
   const [lastupdated, setLastUpdated] = useState("");
   const [summary, setSummary] = useState({});
+  const [zones, setZones] = useState({});
+  const [hotspots, setHotspots] = useState({});
+  const [testReport, setTestReport] = useState({});
   const [fetched, setFetched] = useState(false);
   const [chartData, setChartData] = useState([]);
 
@@ -24,11 +32,10 @@ function App() {
         let hist = response.data.histories;
         let dist = response.data.histories[response.data.histories.length - 1];
         let mx = 0;
-        for (const d in dist.summary) {
-          if (dist.summary[d].active > mx) {
-            mx = dist.summary[d].active;
-          }
-        }
+        Object.keys(dist.summary).forEach(
+          (d) =>
+            (mx = dist.summary[d].active > mx ? dist.summary[d].active : mx)
+        );
         response = await axios.get(
           "https://keralastats.coronasafe.live/summary.json"
         );
@@ -46,11 +53,49 @@ function App() {
             ...tmpData,
           });
         });
+        response = await axios.get(
+          "https://keralastats.coronasafe.live/zones.json"
+        );
+        let zones = response.data.districts;
+        response = await axios.get(
+          "https://keralastats.coronasafe.live/testreports.json"
+        );
+        let _tr = response.data.reports[response.data.reports.length - 1];
+        let _trOld = response.data.reports[response.data.reports.length - 2];
+        let tr = {
+          summary: {
+            total: _tr.total,
+            positive: _tr.positive,
+            negative: _tr.negative,
+            pending: _tr.pending,
+          },
+          delta: {
+            total: _tr.today,
+            positive: _tr.today_positive,
+            negative: _tr.negative - _trOld.negative,
+            pending: _tr.pending - _trOld.pending,
+          },
+        };
+        response = await axios.get(
+          "https://keralastats.coronasafe.live/hotspots.json"
+        );
+        let k1 = "district";
+        let k2 = "lsgd";
+        let hpts = response.data.hotspots.reduce(
+          (a, b) => ({
+            ...a,
+            [b[k1]]: a[b[k1]] ? a[b[k1]].concat(b[k2]) : [b[k2]],
+          }),
+          {}
+        );
+        setTestReport(tr);
+        setHotspots(hpts);
         setChartData(tmp);
         setMaxActive(mx);
         setHistory(hist);
         setLatest(dist);
         setSummary(summ);
+        setZones(zones);
         setLastUpdated(response.data.last_updated);
         setFetched(true);
       })();
@@ -58,18 +103,18 @@ function App() {
   }, [fetched]);
 
   return (
-    <div className="flex bg-fiord-900 min-h-screen min-w-full justify-center">
+    <div className="flex bg-fiord-900 min-h-screen min-w-full justify-center antialiased overflow-hidden">
       {!fetched && <div className="spinner min-h-screen min-w-full"></div>}
       {fetched && (
-        <div className="flex-1 flex-col p-5 font-inter text-primary overflow-hidden antialiased">
+        <div className="flex-1 flex-col p-5 font-inter min-h-screen min-w-full text-primary">
           <div className="flex flex-col avg:flex-row">
             <div className="flex-none avg:pr-2 avg:mr-auto mb-2 avg:mb-0">
               <p className="leading-none font-extrabold tracking-wider text-lg sm:text-xl md:text-2xl lg:text-3xl avg:text-5xl text-center avg:text-left">
-                KERALA COVID-19 TRACKER
+                KERALA COVID-19 DASHBOARD
               </p>
               <div className="pt-1 sm:pt-0 leading-tight text-mobile sm:text-sm text-center avg:text-left">
                 <div>
-                  <p className="inline font-semibold">Last Updated:</p>
+                  <p className="inline font-semibold">Last Updated: </p>
                   {lastupdated}
                 </div>
                 <div>
@@ -90,14 +135,31 @@ function App() {
           </div>
           <div className="flex flex-col avg:flex-row mt-4">
             <div className="flex flex-col pl-0 avg:pl-2 avg:w-1/3">
-              <Map districts={latest} summary={summary} maxActive={maxActive} />
+              <Map
+                districts={latest}
+                summary={summary}
+                maxActive={maxActive}
+                zones={zones}
+              />
             </div>
             <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
-              <div>
-                <Charts data={chartData} />
+              <Charts data={chartData} />
+              <Table districts={latest} summary={summary} zones={zones} />
+            </div>
+          </div>
+          <div className="flex flex-col avg:flex-row mt-4">
+            <div className="flex flex-col avg:w-5/12 avg:pr-2">
+              <Hotspots hotspots={hotspots} />
+            </div>
+            <div className="flex flex-col avg:flex-row avg:w-7/12 avg:pl-2 mt-4 avg:mt-0">
+              <div className="flex flex-col avg:flex-row avg:w-3/5 avg:mr-4 mb-4 avg:mb-0">
+                <Zones zones={zones} />
               </div>
-              <div className="flex-auto">
-                <Table districts={latest} summary={summary} />
+              <div className="flex flex-col avg:flex-row avg:w-2/5 avg:mb-0">
+                <div className="flex flex-col space-y-4 min-w-full">
+                  <Testing testReport={testReport} />
+                  <Links />
+                </div>
               </div>
             </div>
           </div>
@@ -107,4 +169,4 @@ function App() {
   );
 }
 
-export default App;
+export default hot(module)(App);
