@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useWindowWidth } from "@react-hook/window-size/throttled";
 import * as d3 from "d3";
 import { legendColor } from "d3-svg-legend";
+import React, { useEffect, useRef, useState } from "react";
 import * as topojson from "topojson";
 import { lang, zoneColor } from "../constants";
-import { useWindowWidth } from "@react-hook/window-size/throttled";
 
 function Map({ districts, summary, maxActive, zones }) {
   const [district, setDistrict] = useState({});
@@ -148,7 +148,7 @@ function Map({ districts, summary, maxActive, zones }) {
       setCurLang(Object.keys(lang).slice(1));
       setMapHeight(610);
       setLegendPos(440);
-    }else if (width >= 1280) {
+    } else if (width >= 1280) {
       setCurLang(Object.keys(lang).slice(1));
       setMapHeight(610);
       setLegendPos(480);
@@ -170,6 +170,7 @@ function Map({ districts, summary, maxActive, zones }) {
       setLegendPos(325);
     }
   }, [width]);
+  
   return (
     <div className="flex flex-col relative rounded-lg p-4 bg-fiord-800 avg2:mb-0 min-w-full min-h-full">
       <svg

@@ -55,6 +55,9 @@ module.exports = {
     spinner: ["responsive"],
     margin: ["responsive", "last"],
     padding: ["responsive", "last"],
+    transitionProperty: ["responsive", "hover", "focus"],
+    rotate: ["responsive", "hover", "group-hover"],
+    scale: ["responsive", "hover", "group-hover"],
   },
   plugins: [
     require("tailwindcss-spinner")(),

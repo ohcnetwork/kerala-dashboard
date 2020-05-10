@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { lang, zoneColor } from "../constants";
 
 function Table({ districts, summary, zones }) {
@@ -78,9 +78,7 @@ function Table({ districts, summary, zones }) {
                   key={index}
                   onClick={(e) => handleSort(e)}
                 >
-                  <abbr className="text-red-500" title={header}>
-                    {lang[header]}
-                  </abbr>
+                  <abbr title={header}>{lang[header]}</abbr>
                   {sortData.sortColumn === header && <span>*</span>}
                 </th>
               );
