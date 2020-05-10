@@ -17,9 +17,6 @@
     "build": "poi --prod",
     "dev": "poi --serve"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
