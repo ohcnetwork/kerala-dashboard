@@ -1,21 +1,23 @@
 {
-  "name": "kerala_map",
+  "name": "kerala-dashboard",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@react-hook/window-size": "^2.0.5",
+    "@react-hook/window-size": "^3.0.6",
     "axios": "^0.19.2",
     "d3": "^5.16.0",
-    "d3-geo": "^1.12.0",
+    "d3-geo": "^1.12.1",
     "d3-svg-legend": "^2.25.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "recharts": "^1.8.5",
+    "register-service-worker": "^1.7.1",
     "topojson": "^3.0.2"
   },
   "scripts": {
     "build": "poi --prod",
-    "dev": "poi --serve"
+    "dev": "poi --serve",
+    "start": "serve -s build"
   },
   "browserslist": {
     "production": [
@@ -30,12 +32,12 @@
     ]
   },
   "devDependencies": {
+    "@poi/plugin-pwa": "^12.0.3",
+    "autoprefixer": "^9.8.1",
+    "cssnano": "^4.1.10",
     "poi": "^12.8.0",
     "react-hot-loader": "^4.12.21",
     "tailwindcss": "^1.4.6",
-    "autoprefixer": "^9.7.6",
-    "cssnano": "^4.1.10",
-    "tailwindcss-spinner": "^1.0.0",
     "tailwindcss-border-gradients": "^2.0.3",
     "tailwindcss-gradients": "^3.0.0"
   }

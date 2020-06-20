@@ -60,22 +60,7 @@ function App() {
         response = await axios.get(
           "https://keralastats.coronasafe.live/testreports.json"
         );
-        let _tr = response.data.reports[response.data.reports.length - 1];
-        let _trOld = response.data.reports[response.data.reports.length - 2];
-        let tr = {
-          summary: {
-            total: _tr.total,
-            positive: _tr.positive,
-            negative: _tr.negative,
-            pending: _tr.pending,
-          },
-          delta: {
-            total: _tr.today,
-            positive: _tr.today_positive,
-            negative: _tr.negative - _trOld.negative,
-            pending: _tr.pending - _trOld.pending,
-          },
-        };
+        let tr = response.data.reports[response.data.reports.length - 1];
         response = await axios.get(
           "https://keralastats.coronasafe.live/hotspots.json"
         );
@@ -103,16 +88,23 @@ function App() {
   }, [fetched]);
 
   return (
-    <div className="flex bg-fiord-900 min-h-screen min-w-full justify-center antialiased overflow-hidden">
-      {!fetched && <div className="spinner min-h-screen min-w-full"></div>}
+    <div className="flex justify-center min-w-full min-h-screen overflow-hidden antialiased bg-fiord-900">
+      {!fetched && (
+        <div className="flex items-center">
+          <div className="lds-ripple">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
       {fetched && (
-        <div className="flex-1 flex-col p-5 font-inter min-h-screen min-w-full text-primary">
+        <div className="flex-col flex-1 min-w-full min-h-screen p-5 font-inter text-primary">
           <div className="flex flex-col avg:flex-row">
-            <div className="flex-none avg:pr-2 avg:mr-auto mb-2 avg:mb-0">
-              <p className="leading-none font-extrabold tracking-wider text-lg sm:text-xl md:text-2xl lg:text-3xl avg:text-5xl text-center avg:text-left">
+            <div className="flex-none mb-2 avg:pr-2 avg:mr-auto avg:mb-0">
+              <p className="text-lg font-extrabold leading-none tracking-wider text-center sm:text-xl md:text-2xl lg:text-3xl avg:text-5xl avg:text-left">
                 KERALA COVID-19 DASHBOARD
               </p>
-              <div className="pt-1 sm:pt-0 leading-tight text-mobile sm:text-sm text-center avg:text-left">
+              <div className="pt-1 leading-tight text-center sm:pt-0 text-mobile sm:text-sm avg:text-left">
                 <div>
                   <p className="inline font-semibold">Last Updated: </p>
                   {lastupdated}
@@ -133,7 +125,7 @@ function App() {
               <Counter data={summary} />
             </div>
           </div>
-          <div className="flex flex-col avg:flex-row mt-4">
+          <div className="flex flex-col mt-4 avg:flex-row">
             <div className="flex flex-col pl-0 avg:pl-2 avg:w-1/3">
               <Map
                 districts={latest}
@@ -142,21 +134,21 @@ function App() {
                 zones={zones}
               />
             </div>
-            <div className="flex flex-col order-last avg:order-first pr-0 avg:pr-2 avg:w-2/3">
+            <div className="flex flex-col order-last pr-0 avg:order-first avg:pr-2 avg:w-2/3">
               <Charts data={chartData} />
               <Table districts={latest} summary={summary} zones={zones} />
             </div>
           </div>
-          <div className="flex flex-col avg:flex-row mt-4">
+          <div className="flex flex-col mt-4 avg:flex-row">
             <div className="flex flex-col avg:w-5/12 avg:pr-2">
               <Hotspots hotspots={hotspots} />
             </div>
-            <div className="flex flex-col avg:flex-row avg:w-7/12 avg:pl-2 mt-4 avg:mt-0">
-              <div className="flex flex-col avg:flex-row avg:w-3/5 avg:mr-4 mb-4 avg:mb-0">
+            <div className="flex flex-col mt-4 avg:flex-row avg:w-7/12 avg:pl-2 avg:mt-0">
+              <div className="flex flex-col mb-4 avg:flex-row avg:w-3/5 avg:mr-4 avg:mb-0">
                 <Zones zones={zones} />
               </div>
               <div className="flex flex-col avg:flex-row avg:w-2/5 avg:mb-0">
-                <div className="flex flex-col space-y-4 min-w-full">
+                <div className="flex flex-col min-w-full space-y-4">
                   <Testing testReport={testReport} />
                   <Links />
                 </div>

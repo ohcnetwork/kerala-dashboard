@@ -1,6 +1,8 @@
 module.exports = {
   important: true,
-  purge: ["./public/**/*.html", "./src/**/*.jsx", "./src/**/*.js"],
+  purge: {
+    content: ["./public/**/*.html", "./src/**/*.jsx", "./src/**/*.js"],
+  },
   theme: {
     spinner: (theme) => ({
       default: {
@@ -52,7 +54,6 @@ module.exports = {
     conicGradientColors: (theme) => theme("colors"),
   },
   variants: {
-    spinner: ["responsive"],
     margin: ["responsive", "last"],
     padding: ["responsive", "last"],
     transitionProperty: ["responsive", "hover", "focus"],
@@ -60,7 +61,6 @@ module.exports = {
     scale: ["responsive", "hover", "group-hover"],
   },
   plugins: [
-    require("tailwindcss-spinner")(),
     require("tailwindcss-border-gradients")(),
     require("tailwindcss-gradients"),
   ],
