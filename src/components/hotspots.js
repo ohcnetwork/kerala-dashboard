@@ -7,7 +7,7 @@ function ListItem({ h, d }) {
     <div>
       <div
         onClick={() => setActive(!active)}
-        className="group flex justify-between "
+        className="flex justify-between group "
       >
         <div className="flex">
           <svg
@@ -28,17 +28,18 @@ function ListItem({ h, d }) {
         </div>
         <div>{d.length}</div>
       </div>
-      {active &&
-        d.map((_h) => <div className="ml-4 mb-0 last:mb-2 text-sm">{_h}</div>)}
+      {active && (
+        <div className="mb-0 ml-4 text-sm last:mb-2">{d.join(", ")}</div>
+      )}
     </div>
   );
 }
 
 function Hotspots({ hotspots }) {
   return (
-    <div className="flex-1 flex-col rounded-lg p-4 bg-fiord-800 avg2:mb-0 min-w-full">
+    <div className="flex-col flex-1 min-w-full p-4 rounded-lg bg-fiord-800 avg2:mb-0">
       <div className="flex justify-between pointer-events-none">
-        <div className="font-semibold">District-wise Hotspots</div>
+        <div className="font-semibold">District-wise Containment Zones</div>
         <div className="inline">
           {Object.values(hotspots).reduce((a, c) => a + c.length, 0)}
         </div>

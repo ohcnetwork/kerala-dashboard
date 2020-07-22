@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { lang, zoneColor } from "../constants";
+import { lang } from "../constants";
 
-function Table({ districts, summary, zones }) {
+function Table({ districts, summary }) {
   const [data, setData] = useState([]);
   const [sortData, setSortData] = useState({
     sortColumn: "confirmed",
@@ -65,8 +65,8 @@ function Table({ districts, summary, zones }) {
   doSort();
 
   return (
-    <div className="flex rounded-lg bg-fiord-800 p-2 avg:p-4 overflow-x-scroll lg:overflow-hidden text-mobile lg:text-xs avg:text-sm fk:text-base h-full justify-center">
-      <table className="table min-h-full min-w-full">
+    <div className="flex justify-center h-full p-2 overflow-x-scroll rounded-lg bg-fiord-800 avg:p-4 lg:overflow-hidden text-mobile lg:text-xs avg:text-sm fk:text-base">
+      <table className="table min-w-full min-h-full">
         <thead>
           <tr>
             {Object.keys(lang).map((header, index) => {
@@ -92,15 +92,11 @@ function Table({ districts, summary, zones }) {
                 {Object.keys(lang).map((header, index) => {
                   return (
                     <td
-                      className={
-                        header !== "district"
-                          ? "text-center"
-                          : zoneColor[zones[district[header]]]
-                      }
+                      className={header !== "district" ? "text-center" : ""}
                       key={index}
                     >
                       {district[header]}
-                      <span className="text-fiord-400 ml-1 text-mobilexs xs:text-mobile truncate">
+                      <span className="ml-1 truncate text-fiord-400 text-mobilexs xs:text-mobile">
                         {district["delta"][header] > 0
                           ? `+${district["delta"][header]}`
                           : district["delta"][header] === 0
@@ -124,7 +120,7 @@ function Table({ districts, summary, zones }) {
                     key={index}
                   >
                     {summary.summary[header]}
-                    <p className="text-fiord-400 inline ml-1 text-mobilexs xs:text-mobile truncate">
+                    <p className="inline ml-1 truncate text-fiord-400 text-mobilexs xs:text-mobile">
                       {summary.delta[header] > 0
                         ? `+${summary.delta[header]}`
                         : summary.delta[header] === 0

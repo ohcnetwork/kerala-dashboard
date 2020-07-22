@@ -8,7 +8,6 @@ import Links from "./components/links";
 import Map from "./components/map";
 import Table from "./components/table";
 import Testing from "./components/testing";
-import Zones from "./components/zones";
 import { lang } from "./constants";
 
 function App() {
@@ -17,7 +16,6 @@ function App() {
   const [maxActive, setMaxActive] = useState(0);
   const [lastupdated, setLastUpdated] = useState("");
   const [summary, setSummary] = useState({});
-  const [zones, setZones] = useState({});
   const [hotspots, setHotspots] = useState({});
   const [testReport, setTestReport] = useState({});
   const [fetched, setFetched] = useState(false);
@@ -54,10 +52,6 @@ function App() {
           });
         });
         response = await axios.get(
-          "https://keralastats.coronasafe.live/zones.json"
-        );
-        let z = response.data.districts;
-        response = await axios.get(
           "https://keralastats.coronasafe.live/testreports.json"
         );
         let tr = response.data.reports[response.data.reports.length - 1];
@@ -80,7 +74,6 @@ function App() {
         setHistory(hist);
         setLatest(dist);
         setSummary(summ);
-        setZones(z);
         setLastUpdated(response.data.last_updated);
         setFetched(true);
       })();
@@ -131,27 +124,22 @@ function App() {
                 districts={latest}
                 summary={summary}
                 maxActive={maxActive}
-                zones={zones}
+                hotspots={hotspots}
               />
             </div>
             <div className="flex flex-col order-last pr-0 avg:order-first avg:pr-2 avg:w-2/3">
               <Charts data={chartData} />
-              <Table districts={latest} summary={summary} zones={zones} />
+              <Table districts={latest} summary={summary} />
             </div>
           </div>
           <div className="flex flex-col mt-4 avg:flex-row">
-            <div className="flex flex-col avg:w-5/12 avg:pr-2">
+            <div className="flex flex-col avg:w-3/4 avg:pr-2">
               <Hotspots hotspots={hotspots} />
             </div>
-            <div className="flex flex-col mt-4 avg:flex-row avg:w-7/12 avg:pl-2 avg:mt-0">
-              <div className="flex flex-col mb-4 avg:flex-row avg:w-3/5 avg:mr-4 avg:mb-0">
-                <Zones zones={zones} />
-              </div>
-              <div className="flex flex-col avg:flex-row avg:w-2/5 avg:mb-0">
-                <div className="flex flex-col min-w-full space-y-4">
-                  <Testing testReport={testReport} />
-                  <Links />
-                </div>
+            <div className="flex flex-col mt-4 avg:flex-row avg:w-1/4 avg:pl-2 avg:mt-0">
+              <div className="flex flex-col min-w-full space-y-4">
+                <Testing testReport={testReport} />
+                <Links />
               </div>
             </div>
           </div>

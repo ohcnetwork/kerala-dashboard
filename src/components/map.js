@@ -3,9 +3,9 @@ import * as d3 from "d3";
 import { legendColor } from "d3-svg-legend";
 import React, { useEffect, useRef, useState } from "react";
 import * as topojson from "topojson";
-import { lang, zoneColor } from "../constants";
+import { lang } from "../constants";
 
-function Map({ districts, summary, maxActive, zones }) {
+function Map({ districts, summary, maxActive, hotspots }) {
   const [district, setDistrict] = useState({});
   const [renderData, setRenderData] = useState(null);
   const [curLang, setCurLang] = useState([]);
@@ -170,11 +170,11 @@ function Map({ districts, summary, maxActive, zones }) {
       setLegendPos(325);
     }
   }, [width]);
-  
+
   return (
-    <div className="flex flex-col relative rounded-lg p-4 bg-fiord-800 avg2:mb-0 min-w-full min-h-full">
+    <div className="relative flex flex-col min-w-full min-h-full p-4 rounded-lg bg-fiord-800 avg2:mb-0">
       <svg
-        className="z-0 min-h-full min-w-full text-mobile avg2:text-base"
+        className="z-0 min-w-full min-h-full text-mobile avg2:text-base"
         id="chart"
         height={mapHeight}
         ref={map}
@@ -185,19 +185,19 @@ function Map({ districts, summary, maxActive, zones }) {
         }
         style={{ pointerEvents: "none" }}
       >
-        <div className="m-2 sm:px-2 px-1 sm:px-2 py-1 rounded-md bg-gradient-r-fiord-700 font-semibold">
+        <div className="px-1 py-1 m-2 font-semibold rounded-md sm:px-2 bg-gradient-r-fiord-700">
           <p className="text-sm avg2:text-xl">{district.name}</p>
         </div>
         {curLang.map((k, i) => {
           return (
             <div
               key={i}
-              className="mx-2 my-1 sm:my-1 px-1 sm:px-2 py-1 rounded-md bg-gradient-r-fiord-700 max-w-none"
+              className="px-1 py-1 mx-2 my-1 rounded-md sm:my-1 sm:px-2 bg-gradient-r-fiord-700 max-w-none"
             >
               <p>{lang[k]}</p>
               <div className="font-medium">
                 {district[k]}
-                <p className="inline text-mobilexs avg2:text-mobile ml-1 text-fiord-400 ">
+                <p className="inline ml-1 text-mobilexs avg2:text-mobile text-fiord-400 ">
                   {district.delta[k] > 0
                     ? `+${district.delta[k]}`
                     : district.delta[k] === 0
@@ -208,18 +208,14 @@ function Map({ districts, summary, maxActive, zones }) {
             </div>
           );
         })}
-        {zones[district.name] && (
-          <div className="mx-2 my-1 sm:my-1 px-1 sm:px-2 py-1 rounded-md bg-gradient-r-fiord-700 max-w-none">
-            <p>Zone</p>
-            <div
-              className={`font-medium capitalize ${
-                zoneColor[zones[district.name]]
-              }`}
-            >
-              {zones[district.name]}
-            </div>
+        <div className="px-1 py-1 mx-2 my-1 rounded-md sm:my-1 sm:px-2 bg-gradient-r-fiord-700 max-w-none">
+          <p>Containment Zones</p>
+          <div className="font-medium capitalize">
+            {district.name === "All Districts"
+              ? Object.values(hotspots).reduce((p, c) => p + c.length, 0)
+              : hotspots[district.name]?.length}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
