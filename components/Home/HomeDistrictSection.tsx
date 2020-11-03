@@ -21,7 +21,7 @@ import {
 } from "../../lib/constants";
 import { useHomeDistrictStore } from "../../lib/stores";
 import GraphCard from "./SubComponents/GraphCard";
-import Map from "./SubComponents/Map";
+import SVGMap from "./SubComponents/SVGMap";
 
 type HomeDistrictSectionProps = {
   districtHistories: Stats.DistrictHistories;
@@ -125,7 +125,7 @@ export default function HomeDistrictSection({
           )}
         </div>
         {mapMode === MapMode.State ? (
-          <Map
+          <SVGMap
             center={[76.2, 10.568_310_664_701_643]}
             fill={(geo) =>
               colorScale(
@@ -150,7 +150,7 @@ export default function HomeDistrictSection({
             zoom={1.5}
           />
         ) : (
-          <Map
+          <SVGMap
             center={DistrictProjConfig[selectedDistrict] || [0, 0]}
             fill={(g) =>
               hotspotsHistories[hotspotsHistories.length - 1].hotspots.find(

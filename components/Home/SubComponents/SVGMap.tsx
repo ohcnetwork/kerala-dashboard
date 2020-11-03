@@ -23,7 +23,7 @@ type MapProps = {
   center: Point;
 };
 
-export default function Map({
+export default function SVGMap({
   geoJSON,
   scale,
   zoom = 1,
