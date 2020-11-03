@@ -24,10 +24,10 @@ export default function Sidebar() {
   return (
     <>
       <aside className="flex flex-col flex-shrink-0 h-full pointer-events-none fixed w-full z-50 xl:w-auto">
-        <div className="flex flex-shrink-0 h-12 ml-6 py-2 pointer-events-auto dark:text-green-400 text-green-500">
+        <div className="flex flex-shrink-0 h-12 ml-6 py-2 dark:text-green-400 text-green-500">
           <button
             type="button"
-            className="focus:shadow-outline-green rounded-md mr-2 focus:outline-none p-1 md:mr-6"
+            className="focus:shadow-outline-green rounded-md mr-2 focus:outline-none p-1 pointer-events-auto md:mr-6"
             onClick={toggleSidebar}
             aria-label="Menu"
           >
