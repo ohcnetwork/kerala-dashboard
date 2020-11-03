@@ -1,10 +1,19 @@
-const cssnano = require("cssnano");
 module.exports = {
   plugins: [
-    require("tailwindcss"),
-    require("autoprefixer"),
-    cssnano({
-      preset: "default",
-    }),
+    "tailwindcss",
+    "postcss-flexbugs-fixes",
+    [
+      "postcss-preset-env",
+      {
+        autoprefixer: {
+          flexbox: "no-2009",
+        },
+        features: {
+          "custom-properties": false,
+        },
+        stage: 3,
+      },
+    ],
+    "cssnano",
   ],
 };

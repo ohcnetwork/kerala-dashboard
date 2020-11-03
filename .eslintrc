@@ -1,0 +1,38 @@
+{
+  "extends": [
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "prettier/standard",
+    "galex"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "array-callback-return": "off",
+    "prefer-template": "off",
+    "no-negated-condition": "off",
+    "sonarjs/no-useless-catch": "off",
+    "sonarjs/no-duplicate-string": "off",
+    "sonarjs/cognitive-complexity": "off",
+    "sonarjs/no-identical-functions": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "inclusive-language/use-inclusive-words": "off",
+    "import/no-default-export": "off",
+    "require-await": "off",
+    "unicorn/explicit-length-check": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "unicorn/no-abusive-eslint-disable": "off",
+    "prettier/prettier": "error",
+    "react/jsx-no-useless-fragment": "off",
+    "react/no-array-index-key": "off",
+    "react/destructuring-assignment": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "import/dynamic-import-chunkname": "off",
+    "promise/prefer-await-to-then": "off",
+    "promise/no-nesting": "off",
+    "sort-keys-fix/sort-keys-fix": "off"
+  }
+}

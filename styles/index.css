@@ -1,0 +1,116 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+/* Write your own custom component styles here */
+.recharts-default-tooltip {
+  @apply bg-gray-50 dark:bg-gray-800 m-0 p-2 rounded-md shadow-xs whitespace-no-wrap !important;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  @apply bg-gradient-to-r from-green-400 via-green-600 to-green-400 animate-shine bg-100%;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  @apply mr-6 mt-2 !important;
+}
+
+.mapboxgl-ctrl-group {
+  @apply bg-green-400 !important;
+}
+
+.mapboxgl-ctrl-group button {
+  @apply w-8 h-8 rounded-md !important;
+}
+
+.mapboxgl-ctrl-group button:focus {
+  @apply shadow-outline-white !important;
+}
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='29' height='29' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg' fill='white'%3E%3Cpath d='M10 4C9 4 9 5 9 5v.1A5 5 0 005.1 9H5s-1 0-1 1 1 1 1 1h.1A5 5 0 009 14.9v.1s0 1 1 1 1-1 1-1v-.1a5 5 0 003.9-3.9h.1s1 0 1-1-1-1-1-1h-.1A5 5 0 0011 5.1V5s0-1-1-1zm0 2.5a3.5 3.5 0 110 7 3.5 3.5 0 110-7z'/%3E%3Ccircle cx='10' cy='10' r='2'/%3E%3C/svg%3E") !important;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  -webkit-align-self: center;
+  align-self: center;
+  border-top: none;
+  border-bottom-color: var(--color-green-400) !important;
+}
+
+.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip {
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  border-top: none;
+  border-left: none;
+  border-bottom-color: var(--color-green-400) !important;
+}
+
+.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  border-top: none;
+  border-right: none;
+  border-bottom-color: var(--color-green-400) !important;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  -webkit-align-self: center;
+  align-self: center;
+  border-bottom: none;
+  border-top-color: var(--color-green-400) !important;
+}
+
+.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip {
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  border-bottom: none;
+  border-left: none;
+  border-top-color: var(--color-green-400) !important;
+}
+
+.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  border-bottom: none;
+  border-right: none;
+  border-top-color: var(--color-green-400) !important;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  -webkit-align-self: center;
+  align-self: center;
+  border-left: none;
+  border-right-color: var(--color-green-400) !important;
+}
+
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  -webkit-align-self: center;
+  align-self: center;
+  border-right: none;
+  border-left-color: var(--color-green-400) !important;
+}
+
+.mapboxgl-popup-content {
+  @apply bg-green-400 !important;
+}
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */

@@ -1,67 +1,107 @@
-module.exports = {
-  important: true,
-  purge: {
-    content: ["./public/**/*.html", "./src/**/*.jsx", "./src/**/*.js"],
-  },
+const windmill = require("@windmill/react-ui/config");
+const defaultTheme = require("tailwindcss/defaultTheme");
+
+module.exports = windmill({
+  purge: [
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./lib/theme.ts",
+  ],
   theme: {
-    spinner: (theme) => ({
-      default: {
-        color: "#A0AEC0",
-        size: "4em",
-        border: "2px",
-        speed: "500ms",
-      },
-    }),
     extend: {
-      textColor: {
-        primary: "#edf2f7",
-        secondary: "#ffed4a",
-        danger: "#e3342f",
+      fontSize: {
+        xxs: ".65rem",
       },
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
-      fontSize: {
-        mobilexs: ".55rem",
-        mobile: ".65rem",
-        sm2: ".965rem",
+      boxShadow: {
+        bottom:
+          "0 5px 6px -7px rgba(0, 0, 0, 0.6), 0 2px 4px -5px rgba(0, 0, 0, 0.06)",
+      },
+      animation: {
+        shine: "shine 15s ease infinite",
+      },
+      backgroundSize: {
+        "100%": "400% 100%",
       },
       colors: {
-        purps: "#9561E2",
-        fiord: {
-          100: "#EDEEF0",
-          200: "#D2D5DA",
-          300: "#B7BBC3",
-          400: "#828997",
-          500: "#4C566A",
-          600: "#444D5F",
-          700: "#2E3440",
-          800: "#222730",
-          900: "#171A20",
+        bunker: {
+          100: "#E8E8E8",
+          200: "#C5C6C6",
+          300: "#A3A3A4",
+          400: "#5D5F5F",
+          50: "#F3F4F4",
+          500: "#181A1B",
+          600: "#161718",
+          700: "#0E1010",
+          800: "#0B0C0C",
+          900: "#070808",
         },
       },
-      screens: {
-        fk: "2560px",
-        avg2: "1600px",
-        avg: "1280px",
-        xs: "500px",
-        mobile: "370px",
+      maxHeight: {
+        "90screen": "90vh",
+      },
+      height: {
+        "50screen": "50vh",
+        "60screen": "60vh",
+        "70screen": "70vh",
+        "75screen": "75vh",
+        "80screen": "80vh",
+        "90screen": "90vh",
+      },
+      maxWidth: {
+        "35screen": "35vw",
+      },
+      width: {
+        "35screen": "35vw",
+      },
+      keyframes: {
+        shine: {
+          "0%": {
+            backgroundPosition: "0% 50%",
+          },
+          "100%": {
+            backgroundPosition: "0% 50%",
+          },
+          "50%": {
+            backgroundPosition: "100% 50%",
+          },
+        },
       },
     },
-    linearBorderGradients: (theme) => ({ colors: theme("colors") }),
-    linearGradientColors: (theme) => theme("colors"),
-    radialGradientColors: (theme) => theme("colors"),
-    conicGradientColors: (theme) => theme("colors"),
   },
   variants: {
-    margin: ["responsive", "last"],
-    padding: ["responsive", "last"],
-    transitionProperty: ["responsive", "hover", "focus"],
-    rotate: ["responsive", "hover", "group-hover"],
-    scale: ["responsive", "hover", "group-hover"],
+    animation: ["responsive", "hover", "focus"],
+    backgroundPosition: ["responsive", "hover", "focus"],
+  },
+  experimental: {
+    applyComplexClasses: true,
   },
   plugins: [
-    require("tailwindcss-border-gradients")(),
-    require("tailwindcss-gradients"),
+    require("@tailwindcss/typography"),
+    require("tailwind-css-variables")({
+      colors: "color",
+      screens: false,
+      fontFamily: false,
+      fontSize: false,
+      fontWeight: false,
+      lineHeight: false,
+      letterSpacing: false,
+      backgroundSize: false,
+      borderWidth: false,
+      borderRadius: false,
+      width: false,
+      height: false,
+      minWidth: false,
+      minHeight: false,
+      maxWidth: false,
+      maxHeight: false,
+      padding: false,
+      margin: false,
+      boxShadow: false,
+      zIndex: false,
+      opacity: false,
+    }),
   ],
-};
+});
