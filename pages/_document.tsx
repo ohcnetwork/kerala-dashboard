@@ -2,6 +2,22 @@ import type { DocumentContext } from "next/document";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import React from "react";
 
+function setInitialColorMode() {
+  const userPreference =
+    !!window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const colorMode =
+    window.localStorage.getItem("theme") || (userPreference ? "dark" : "light");
+  document.documentElement.classList.add(`theme-${colorMode}`);
+}
+
+// our function needs to be a string
+const blockingSetInitialColorMode = `(function() {
+        ${setInitialColorMode.toString()}
+        setInitialColorMode();
+})()
+`;
+
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
@@ -23,6 +39,11 @@ class MyDocument extends Document {
           />
         </Head>
         <body className="antialiased">
+          <script
+            dangerouslySetInnerHTML={{
+              __html: blockingSetInitialColorMode,
+            }}
+          ></script>
           <Main />
           <NextScript />
         </body>
