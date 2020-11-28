@@ -40,10 +40,11 @@ class MyDocument extends Document {
         </Head>
         <body className="antialiased">
           <script
+            // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html: blockingSetInitialColorMode,
             }}
-          ></script>
+          />
           <Main />
           <NextScript />
         </body>
