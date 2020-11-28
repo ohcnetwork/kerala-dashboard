@@ -6,6 +6,7 @@
     "galex"
   ],
   "rules": {
+    "@typescript-eslint/no-confusing-void-expression": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
