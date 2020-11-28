@@ -72,6 +72,25 @@ declare namespace Stats {
 
   type HotspotHistories = HotspotHistory[];
 
+  type HotspotSummaries = {
+    date: string;
+    total: number;
+    alappuzha: number;
+    ernakulam: number;
+    idukki: number;
+    kannur: number;
+    kasaragod: number;
+    kollam: number;
+    kottayam: number;
+    kozhikode: number;
+    malappuram: number;
+    palakkad: number;
+    pathanamthitta: number;
+    thiruvananthapuram: number;
+    thrissur: number;
+    wayanad: number;
+  }[];
+
   type TestReportHistory = {
     date: string;
     total: number;

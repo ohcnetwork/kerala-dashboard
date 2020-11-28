@@ -14,12 +14,12 @@ import { Districts, SummaryLang, SummaryKeys } from "../../lib/constants";
 
 type HomeTableProps = {
   districtHistories: Stats.DistrictHistories;
-  hotspotsHistories: Stats.HotspotHistories;
+  hotspotsSummaries: Stats.HotspotSummaries;
 };
 
 export default function HomeTable({
   districtHistories,
-  hotspotsHistories,
+  hotspotsSummaries,
 }: HomeTableProps) {
   const columns = useMemo(
     () => [
@@ -43,9 +43,7 @@ export default function HomeTable({
       Object.values(Districts).map((d) => ({
         district: d,
         ...districtHistories[districtHistories.length - 1].summary[d],
-        hotspots: hotspotsHistories[
-          hotspotsHistories.length - 1
-        ].hotspots.filter((h) => h.district.toLowerCase() === d).length,
+        hotspots: hotspotsSummaries[hotspotsSummaries.length - 1][d],
       })),
     []
   );

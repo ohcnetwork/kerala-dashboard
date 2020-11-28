@@ -25,12 +25,14 @@ import SVGMap from "./SubComponents/SVGMap";
 
 type HomeDistrictSectionProps = {
   districtHistories: Stats.DistrictHistories;
-  hotspotsHistories: Stats.HotspotHistories;
+  hotspotsSummaries: Stats.HotspotSummaries;
+  hotspotsLatest: Stats.HotspotHistory;
 };
 
 export default function HomeDistrictSection({
   districtHistories,
-  hotspotsHistories,
+  hotspotsSummaries,
+  hotspotsLatest,
 }: HomeDistrictSectionProps) {
   const [
     selectedDistrict,
@@ -153,7 +155,7 @@ export default function HomeDistrictSection({
           <SVGMap
             center={DistrictProjConfig[selectedDistrict] || [0, 0]}
             fill={(g) =>
-              hotspotsHistories[hotspotsHistories.length - 1].hotspots.find(
+              hotspotsLatest.hotspots.find(
                 (t) =>
                   t.district === g.properties.DISTRICT &&
                   t.lsgd === g.properties.LSGD
@@ -247,23 +249,15 @@ export default function HomeDistrictSection({
         <GraphCard
           label="Hotspots"
           value={
-            hotspotsHistories[hotspotsHistories.length - 1].hotspots.filter(
-              (h) => h.district.toLowerCase() === selectedDistrict
-            ).length
+            hotspotsSummaries[hotspotsSummaries.length - 1][selectedDistrict]
           }
           delta={
-            hotspotsHistories[hotspotsHistories.length - 1].hotspots.filter(
-              (h) => h.district.toLowerCase() === selectedDistrict
-            ).length -
-            hotspotsHistories[hotspotsHistories.length - 2].hotspots.filter(
-              (h) => h.district.toLowerCase() === selectedDistrict
-            ).length
+            hotspotsSummaries[hotspotsSummaries.length - 1][selectedDistrict] -
+            hotspotsSummaries[hotspotsSummaries.length - 2][selectedDistrict]
           }
-          data={hotspotsHistories.map((f) => ({
+          data={hotspotsSummaries.map((f) => ({
             date: f.date,
-            data: f.hotspots.filter(
-              (h) => h.district.toLowerCase() === selectedDistrict
-            ).length,
+            data: f[selectedDistrict],
           }))}
         />
       </div>

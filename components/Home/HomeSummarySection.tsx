@@ -11,23 +11,23 @@ import GraphCard from "./SubComponents/GraphCard";
 
 type HomeSummarySectionProps = {
   histories: Stats.Histories;
-  hotspotsHistories: Stats.HotspotHistories;
+  hotspotsSummaries: Stats.HotspotSummaries;
   testReportHistories: Stats.TestReportHistories;
 };
 
 export default function HomeSummarySection({
   histories,
-  hotspotsHistories,
+  hotspotsSummaries,
   testReportHistories,
 }: HomeSummarySectionProps) {
   const [
     latestHistoriesIdx,
-    latestHotspotsHistoriesIdx,
+    latestHotspotsSummariesIdx,
     latestTestReportHistoriesIdx,
   ] = useMemo(
     () => [
       histories.length - 1,
-      hotspotsHistories.length - 1,
+      hotspotsSummaries.length - 1,
       testReportHistories.length - 1,
     ],
     []
@@ -49,14 +49,14 @@ export default function HomeSummarySection({
       ))}
       <GraphCard
         label="Hotspots"
-        value={hotspotsHistories[latestHotspotsHistoriesIdx].hotspots.length}
+        value={hotspotsSummaries[latestHotspotsSummariesIdx].total}
         delta={
-          hotspotsHistories[latestHotspotsHistoriesIdx].hotspots.length -
-          hotspotsHistories[latestHotspotsHistoriesIdx - 1].hotspots.length
+          hotspotsSummaries[latestHotspotsSummariesIdx].total -
+          hotspotsSummaries[latestHotspotsSummariesIdx - 1].total
         }
-        data={hotspotsHistories.map((f) => ({
+        data={hotspotsSummaries.map((f) => ({
           date: f.date,
-          data: f.hotspots.length,
+          data: f.total,
         }))}
       />
       <GraphCard
