@@ -9,9 +9,7 @@ export async function getHistories(): Promise<Stats.HistoriesJSON> {
   return camelcaseKeys(histories, { deep: true });
 }
 
-export async function getHotspotsHistories(): Promise<
-  Stats.HotspotHistoriesJSON
-> {
+export async function getHotspotsHistories(): Promise<Stats.HotspotHistoriesJSON> {
   const res = await fetch(
     "https://keralastats.coronasafe.live/hotspots_histories.json"
   );
