@@ -23,18 +23,7 @@ export default function GraphCard({
   return (
     <Card className="flex flex-col p-2">
       <span className="text-base font-bold whitespace-no-wrap">{label}</span>
-      <span>
-        {Number.isInteger(value) ? (
-          <>
-            {`${value} `}
-            <span className="text-xxs font-semibold">
-              {delta ? (delta > 0 ? `+${delta}` : `-${Math.abs(delta)}`) : "-"}
-            </span>
-          </>
-        ) : (
-          value.toFixed(2)
-        )}
-      </span>
+      <span>{Number.isInteger(value) ? value : value.toFixed(2)}</span>
       <span className="text-xs">
         {percent
           ? percent > 0
