@@ -7,10 +7,14 @@ import { useGlobalStore } from "../lib/stores";
 type HeaderProps = {
   text: string;
   lastUpdated: string;
-  float: boolean;
+  float?: boolean;
 };
 
-export default function Header({ text, lastUpdated, float }: HeaderProps) {
+export default function Header({
+  text,
+  lastUpdated,
+  float = false,
+}: HeaderProps) {
   const [isSidebarOpen, toggleSidebar] = useGlobalStore(
     (state) => [state.isSidebarOpen, state.toggleSidebar],
     shallow

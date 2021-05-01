@@ -1,7 +1,5 @@
 import type { InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import { useEffect } from "react";
-import shallow from "zustand/shallow";
 
 import Header from "../components/Header";
 import HomeDistrictSection from "../components/Home/HomeDistrictSection";

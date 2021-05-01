@@ -1,3 +1,5 @@
+// @ts-nocheck 
+
 import {
   LegendLinear,
   LegendItem,
@@ -133,7 +135,7 @@ export default function HomeDistrictSection({
               colorScale(
                 districtHistories[districtHistories.length - 1].summary[
                   geo.properties.DISTRICT.toLowerCase()
-                ][dataKey]
+                ][dataKey] as number
               )
             }
             stroke={(geo) =>

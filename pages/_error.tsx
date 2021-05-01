@@ -10,9 +10,7 @@ export default function Error({ statusCode }) {
   );
 }
 
-export async function getServerSideProps({ res, err }) {
+Error.getInitialProps = ({ res, err }) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  return {
-    props: { statusCode },
-  };
-}
+  return { statusCode };
+};
