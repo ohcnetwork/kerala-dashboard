@@ -20,7 +20,7 @@ const theme = {
   },
   // TableContainer
   tableContainer: {
-    base: "w-full overflow-hidden rounded-lg shadow-xs",
+    base: "w-full overflow-hidden rounded-lg ring-1 ring-black ring-opacity-5",
   },
   // TableCell
   tableCell: {
@@ -144,7 +144,7 @@ const theme = {
   },
   // Card
   card: {
-    base: "min-w-0 rounded-lg shadow-xs overflow-hidden",
+    base: "min-w-0 rounded-lg ring-1 ring-black ring-opacity-5 overflow-hidden",
     default: "bg-white dark:bg-gray-800",
   },
   cardBody: {

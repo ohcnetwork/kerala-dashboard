@@ -8,7 +8,7 @@
 
 /* Write your own custom component styles here */
 .recharts-default-tooltip {
-  @apply bg-gray-50 dark:bg-gray-800 m-0 p-2 rounded-md shadow-xs whitespace-no-wrap !important;
+  @apply bg-gray-50 dark:bg-gray-800 m-0 p-2 rounded-md ring-1 ring-black ring-opacity-5 whitespace-nowrap !important;
 }
 
 #nprogress {

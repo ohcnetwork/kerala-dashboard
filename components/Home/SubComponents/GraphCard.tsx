@@ -22,7 +22,7 @@ export default function GraphCard({
 
   return (
     <Card className="flex flex-col p-2">
-      <span className="text-base font-bold whitespace-no-wrap">{label}</span>
+      <span className="text-base font-bold whitespace-nowrap">{label}</span>
       <span>
         {Number.isInteger(value) ? (
           <>

@@ -193,7 +193,7 @@ export default function HomeDistrictSection({
             <div className="grid gap-2 grid-cols-2 h-10">
               <Button
                 size="small"
-                className="mt-1 whitespace-no-wrap"
+                className="mt-1 whitespace-nowrap"
                 onClick={() =>
                   mapMode === MapMode.State
                     ? setMapMode(MapMode.District)
@@ -218,7 +218,7 @@ export default function HomeDistrictSection({
                 </Select>
               ) : (
                 <Link href="/hotspots" passHref>
-                  <Button size="small" className="mt-1 whitespace-no-wrap">
+                  <Button size="small" className="mt-1 whitespace-nowrap">
                     Show Detailed
                   </Button>
                 </Link>
