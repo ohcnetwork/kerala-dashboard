@@ -1,11 +1,6 @@
 {
-  "extends": [
-    "plugin:@jarrodldavis/tailwindcss/recommended",
-    "plugin:prettier/recommended",
-    "prettier/react",
-    "prettier/standard",
-    "galex"
-  ],
+  "plugins": ["tailwindcss"],
+  "extends": ["plugin:prettier/recommended", "prettier", "galex"],
   "rules": {
     "@typescript-eslint/no-confusing-void-expression": "off",
     "@typescript-eslint/no-explicit-any": "off",

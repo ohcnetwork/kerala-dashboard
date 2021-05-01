@@ -14,12 +14,12 @@ import getConfig from "next/config";
 import Head from "next/head";
 import path from "path";
 import Pbf from "pbf";
-import React, { useContext, useEffect, useMemo, useRef } from "react";
-import shallow from "zustand/shallow";
+import { useContext, useMemo, useRef } from "react";
 
+import Header from "../components/Header";
 import { MAPBOX } from "../lib/constants";
 import { getHotspotsHistories } from "../lib/getStats";
-import { useGlobalStore, useHotspotsMapStore } from "../lib/stores";
+import { useHotspotsMapStore } from "../lib/stores";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -29,13 +29,6 @@ export default function Hotspots({
   districtPbf,
   lsgdPbf,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [setLastUpdated] = useGlobalStore(
-    (state) => [state.setLastUpdated],
-    shallow
-  );
-  useEffect(() => {
-    setLastUpdated(lastUpdated);
-  }, []);
   const [
     viewport,
     hoveredEntity,
@@ -114,6 +107,7 @@ export default function Hotspots({
       </Head>
 
       <div className="flex flex-grow min-h-screen">
+        <Header text="Hotspots" lastUpdated={lastUpdated} float />
         <Transition
           show={geoLocEntity !== null}
           enter="transition ease-in-out duration-150"

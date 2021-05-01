@@ -1,4 +1,5 @@
 ## Kerala COVID-19 Dashboard
+
 A district-wise map visualization of current COVID-19 stats using data from DHS Kerala bulletins.
 
 API Repo: [Kerala Stats](https://github.com/coronasafe/kerala_stats)

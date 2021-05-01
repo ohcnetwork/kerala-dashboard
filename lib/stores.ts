@@ -5,10 +5,9 @@ import { combine } from "zustand/middleware";
 import { SummaryKeys, Districts, MapMode, MAPBOX } from "./constants";
 
 export const useGlobalStore = create(
-  combine({ isSidebarOpen: false, lastUpdated: "" }, (set) => ({
+  combine({ isSidebarOpen: false }, (set) => ({
     toggleSidebar: () =>
       set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
-    setLastUpdated: (updated: string) => set(() => ({ lastUpdated: updated })),
   }))
 );
 

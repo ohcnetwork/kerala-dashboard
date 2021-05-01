@@ -1,5 +1,4 @@
 import polylabel from "polylabel";
-import React from "react";
 import type { Point } from "react-simple-maps";
 import {
   ComposableMap,

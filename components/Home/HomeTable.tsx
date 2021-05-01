@@ -6,7 +6,7 @@ import {
   TableCell,
   TableBody,
 } from "@windmill/react-ui";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { ChevronDown, ChevronUp } from "react-feather";
 import { useTable, useSortBy } from "react-table";
 

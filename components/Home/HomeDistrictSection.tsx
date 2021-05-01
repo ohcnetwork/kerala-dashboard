@@ -7,7 +7,7 @@ import {
 import { scaleLinear, scaleOrdinal } from "@visx/scale";
 import { Button, Card, Label, Select } from "@windmill/react-ui";
 import Link from "next/link";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import shallow from "zustand/shallow";
 
 import keralaDistrict from "../../data/kerala_district_simplified.json";

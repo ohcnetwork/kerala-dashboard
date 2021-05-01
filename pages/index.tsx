@@ -1,14 +1,14 @@
 import type { InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import shallow from "zustand/shallow";
 
+import Header from "../components/Header";
 import HomeDistrictSection from "../components/Home/HomeDistrictSection";
 import HomeSummarySection from "../components/Home/HomeSummarySection";
 import HomeTable from "../components/Home/HomeTable";
 import { Districts } from "../lib/constants";
 import { getMetaProps } from "../lib/getStats";
-import { useGlobalStore } from "../lib/stores";
 
 export default function Home({
   lastUpdated,
@@ -18,21 +18,14 @@ export default function Home({
   hotspotsLatest,
   testReportHistories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [setLastUpdated] = useGlobalStore(
-    (state) => [state.setLastUpdated],
-    shallow
-  );
-  useEffect(() => {
-    setLastUpdated(lastUpdated);
-  }, []);
-
   return (
     <>
       <Head>
         <title>Kerala Dashboard</title>
       </Head>
 
-      <div className="flex flex-col mb-6 mt-12 mx-6 overflow-hidden space-y-5">
+      <div className="flex flex-col mb-6 mx-6 overflow-hidden space-y-5">
+        <Header text="Kerala Dashboard" lastUpdated={lastUpdated} />
         <HomeSummarySection
           histories={histories}
           hotspotsSummaries={hotspotsSummaries}

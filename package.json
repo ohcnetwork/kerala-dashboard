@@ -36,7 +36,6 @@
     "zustand": "^3.2.0"
   },
   "devDependencies": {
-    "@jarrodldavis/eslint-plugin-tailwindcss": "^0.4.0",
     "@tailwindcss/typography": "^0.4.0",
     "@types/geojson": "^7946.0.7",
     "@types/mapbox-gl": "^2.1.1",
@@ -51,6 +50,8 @@
     "cssnano": "^5.0.2",
     "eslint": "^7.14.0",
     "eslint-config-galex": "^2.7.9",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-tailwindcss": "^1.5.0",
     "postcss": "^8.2.13",
     "postcss-flexbugs-fixes": "^5.0.0",
     "postcss-preset-env": "^6.7.0",

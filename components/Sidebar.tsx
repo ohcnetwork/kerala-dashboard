@@ -1,8 +1,8 @@
 import { Backdrop, Transition, WindmillContext } from "@windmill/react-ui";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
-import { Map, Menu, Moon, Sun, Home } from "react-feather";
+import { useContext } from "react";
+import { Map, Home } from "react-feather";
 import shallow from "zustand/shallow";
 
 import CoronaSafeLogo from "../assets/coronaSafeLogo.svg";
@@ -16,32 +16,14 @@ const routes = [
 export default function Sidebar() {
   const router = useRouter();
   const { mode, toggleMode } = useContext(WindmillContext);
-  const [isSidebarOpen, toggleSidebar, lastUpdated] = useGlobalStore(
-    (state) => [state.isSidebarOpen, state.toggleSidebar, state.lastUpdated],
+  const [isSidebarOpen, toggleSidebar] = useGlobalStore(
+    (state) => [state.isSidebarOpen, state.toggleSidebar],
     shallow
   );
 
   return (
     <>
       <aside className="flex flex-col flex-shrink-0 h-full pointer-events-none fixed w-full z-50 xl:w-auto">
-        <div className="flex flex-shrink-0 h-12 ml-6 py-2 dark:text-green-400 text-green-500">
-          <button
-            type="button"
-            className="focus:shadow-outline-green rounded-md mr-2 focus:outline-none p-1 pointer-events-auto md:mr-6"
-            onClick={toggleSidebar}
-            aria-label="Menu"
-          >
-            <Menu className="h-6 w-6" aria-hidden="true" />
-          </button>
-          <div className="hidden mr-1 pointer-events-none md:block">
-            <span className="block text-2xl font-black leading-none">
-              Kerala Dashboard
-            </span>
-            <span className="block text-xxs leading-none">
-              Last updated on {lastUpdated}
-            </span>
-          </div>
-        </div>
         <Transition
           show={isSidebarOpen}
           enter="transition ease-in-out duration-150"
@@ -51,7 +33,7 @@ export default function Sidebar() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0 transform -translate-x-20"
         >
-          <nav className="dark:bg-gray-800 bg-white rounded-lg flex flex-col h-full justify-between mb-6 mx-6 py-4 pointer-events-auto dark:text-gray-200 z-40 xl:w-auto">
+          <nav className="dark:bg-gray-800 bg-white rounded-lg flex flex-col h-full justify-between my-6 mx-6 py-4 pointer-events-auto dark:text-gray-200 z-40 xl:w-auto">
             <ul className="mt-2 space-y-3">
               {routes.map((r, i) => (
                 <li key={i} className="px-2 py-2 relative">
@@ -73,6 +55,17 @@ export default function Sidebar() {
             <ul className="px-6 space-y-1">
               <ul className="flex text-sm space-x-2">
                 <li>
+                  <button
+                    type="button"
+                    onClick={toggleMode}
+                    aria-label="Toggle color mode"
+                  >
+                    {mode === "dark" ? "Use Light theme" : "Use Dark theme"}
+                  </button>
+                </li>
+              </ul>
+              <ul className="flex text-sm space-x-2">
+                <li>
                   <a href="https://github.com/coronasafe/kerala-dashboard">
                     Github
                   </a>
@@ -87,20 +80,6 @@ export default function Sidebar() {
                 </li>
                 <li>
                   <a href="mailto:info@coronasafe.network">Contact</a>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    className="p-1"
-                    onClick={toggleMode}
-                    aria-label="Toggle color mode"
-                  >
-                    {mode === "dark" ? (
-                      <Sun className="h-3 w-3" aria-hidden="true" />
-                    ) : (
-                      <Moon className="h-3 w-3" aria-hidden="true" />
-                    )}
-                  </button>
                 </li>
               </ul>
               <li className="flex flex-col">

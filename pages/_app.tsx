@@ -3,7 +3,6 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import Router from "next/router";
 import NProgress from "nprogress";
-import React from "react";
 
 import Sidebar from "../components/Sidebar";
 import myTheme from "../lib/theme";

@@ -1,5 +1,5 @@
 import { Card } from "@windmill/react-ui";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { ResponsiveContainer, LineChart, Line, XAxis, Tooltip } from "recharts";
 
 type GraphCardProps = {
