@@ -22,7 +22,7 @@
     "clsx": "^1.1.1",
     "geobuf": "^3.0.2",
     "mapbox-gl": "^2.2.0",
-    "next": "latest",
+    "next": "11.1.0",
     "nprogress": "^0.2.0",
     "pbf": "^3.2.1",
     "polylabel": "^1.1.0",
