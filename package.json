@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@urbica/react-map-gl": "^1.14.2",
-    "@visx/legend": "^1.1.0",
-    "@visx/scale": "^1.1.0",
+    "@visx/legend": "^2.17.0",
+    "@visx/scale": "^2.17.0",
     "@windmill/react-ui": "^0.5.1",
     "buffer-json": "^2.0.0",
     "camelcase-keys": "^6.2.2",
